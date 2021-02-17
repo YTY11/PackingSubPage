@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.packing.agv.mapper.AgvExceptionMapper" >
+  <resultMap id="BaseResultMap" type="com.packing.agv.entity.AgvException" >
+    <result column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="DEVICE" property="device" jdbcType="VARCHAR" />
+    <result column="ERROR" property="error" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="COST" property="cost" jdbcType="VARCHAR" />
+    <result column="WORKSTATION" property="workstation" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="FLOOR" property="floor" jdbcType="VARCHAR" />
+    <result column="RFID" property="rfid" jdbcType="VARCHAR" />
+    <result column="TIME_SLOT" property="timeSlot" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getChance" resultMap="BaseResultMap">
+    SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and <![CDATA[to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd')]]>
+    and <![CDATA[to_char(ENDTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd')]]>
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot desc
+  </select>
+</mapper>

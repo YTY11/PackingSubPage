@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGV设备信息</title>
+    <link th:href="@{/css/deviceInfo.css}" href="../static/css/deviceInfo.css" rel="stylesheet" />
+    <link th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.min.css}" href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+<div class="divContainer">
+    <div class="ditTitle">AGV设备信息</div>
+    <div class="tableTitle">
+        AGV
+    </div>
+    <div class="divMain">
+        <table class="table">
+            <tr class="trTitle">
+                <td rowspan="3" style="vertical-align: middle;">线别</td>
+                <td rowspan="3" style="vertical-align: middle;">Time</td>
+            </tr>
+            <tr class="trTitle">
+                <td colspan="2">产能</td>
+            </tr>
+            <tr class="trTitle">
+                <td>计划</td>
+                <td>实际</td>
+            </tr>
+            <tr>
+                <td rowspan="13" style="vertical-align: middle;">ARF01</td>
+                <td>TTL</td>
+                <td id="shiJiCNAll1"></td>
+                <td id="TTL1"></td>
+            </tr>
+            <tr>
+                <td>08:30~09:30</td>
+                <td id="shiJiCNARF011"></td>
+                <td id="ARF011"></td>
+            </tr>
+            <tr>
+                <td>09:30~10:30</td>
+                <td id="shiJiCNARF012"></td>
+                <td id="ARF012"></td>
+            </tr>
+            <tr>
+                <td>10:30~11:30</td>
+                <td id="shiJiCNARF013"></td>
+                <td id="ARF013"></td>
+            </tr>
+            <tr>
+                <td>11:30~12:30</td>
+                <td id="shiJiCNARF014"></td>
+                <td id="ARF014"></td>
+            </tr>
+            <tr>
+                <td>12:30~13:30</td>
+                <td id="shiJiCNARF015"></td>
+                <td id="ARF015"></td>
+            </tr>
+            <tr>
+                <td>13:30~14:30</td>
+                <td id="shiJiCNARF016"></td>
+                <td id="ARF016"></td>
+            </tr>
+            <tr>
+                <td>14:30~15:30</td>
+                <td id="shiJiCNARF017"></td>
+                <td id="ARF017"></td>
+            </tr>
+            <tr>
+                <td>15:30~16:30</td>
+                <td id="shiJiCNARF018"></td>
+                <td id="ARF018"></td>
+            </tr>
+            <tr>
+                <td>16:30~17:30</td>
+                <td id="shiJiCNARF019"></td>
+                <td id="ARF019"></td>
+            </tr>
+            <tr>
+                <td>17:30~18:30</td>
+                <td id="shiJiCNARF0110"></td>
+                <td id="ARF0110"></td>
+            </tr>
+            <tr>
+                <td>18:30~19:30</td>
+                <td id="shiJiCNARF0111"></td>
+                <td id="ARF0111"></td>
+            </tr>
+            <tr>
+                <td>19:30~20:30</td>
+                <td id="shiJiCNARF0112"></td>
+                <td id="ARF0112"></td>
+            </tr>
+
+            <tr>
+                <td rowspan="13" style="vertical-align: middle;">ARF02</td>
+                <td>TTL</td>
+                <td id="shiJiCNAll2"></td>
+                <td id="TTL2"></td>
+            </tr>
+            <tr>
+                <td>08:30~09:30</td>
+                <td id="shiJiCNARF021"></td>
+                <td id="ARF021"></td>
+            </tr>
+            <tr>
+                <td>09:30~10:30</td>
+                <td id="shiJiCNARF022"></td>
+                <td id="ARF022"></td>
+            </tr>
+            <tr>
+                <td>10:30~11:30</td>
+                <td id="shiJiCNARF023"></td>
+                <td id="ARF023"></td>
+            </tr>
+            <tr>
+                <td>11:30~12:30</td>
+                <td id="shiJiCNARF024"></td>
+                <td id="ARF024"></td>
+            </tr>
+            <tr>
+                <td>12:30~13:30</td>
+                <td id="shiJiCNARF025"></td>
+                <td id="ARF025"></td>
+            </tr>
+            <tr>
+                <td>13:30~14:30</td>
+                <td id="shiJiCNARF026"></td>
+                <td id="ARF026"></td>
+            </tr>
+            <tr>
+                <td>14:30~15:30</td>
+                <td id="shiJiCNARF027"></td>
+                <td id="ARF027"></td>
+            </tr>
+            <tr>
+                <td>15:30~16:30</td>
+                <td id="shiJiCNARF028"></td>
+                <td id="ARF028"></td>
+            </tr>
+            <tr>
+                <td>16:30~17:30</td>
+                <td id="shiJiCNARF029"></td>
+                <td id="ARF029"></td>
+            </tr>
+            <tr>
+                <td>17:30~18:30</td>
+                <td id="shiJiCNARF0210"></td>
+                <td id="ARF0210"></td>
+            </tr>
+            <tr>
+                <td>18:30~19:30</td>
+                <td id="shiJiCNARF0211"></td>
+                <td id="ARF0211"></td>
+            </tr>
+            <tr>
+                <td>19:30~20:30</td>
+                <td id="shiJiCNARF0212"></td>
+                <td id="ARF0212"></td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <tr class="trTitle">
+                <td colspan="2">达成率</td>
+            </tr>
+            <tr class="trTitle">
+                <td>计划</td>
+                <td>实际</td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte1"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte2"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte3"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte4"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte5"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte6"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte7"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte8"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte9"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte10"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte11"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte12"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte13"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte21"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte22"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte23"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte24"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte25"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte26"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte27"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte28"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte29"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte210"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte211"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte212"></td>
+            </tr>
+            <tr>
+                <td>100%</td>
+                <td id="yieldRte213"></td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <thead>
+            <tr class="trTitle">
+                <td colspan="2">机故率</td>
+            </tr>
+            <tr class="trTitle">
+                <td>计划</td>
+                <td>实际</td>
+            </tr>
+            </thead>
+            <tbody class="chanceRate">
+            <tr>
+                <td>5%</td>
+                <td class="chanceRate1"></td>
+            </tr>
+            </tbody>
+            <tbody class="chanceRate">
+            <tr>
+                <td>5%</td>
+                <td class="chanceRate1"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table">
+
+            <thead>
+            <tr class="trTitle">
+                <td colspan="6">机故</td>
+            </tr>
+            <tr class="trTitle">
+                <td>超時</td>
+                <td>脫軌</td>
+                <td>碰撞</td>
+                <td>阻擋</td>
+                <td>急停</td>
+                <td>機故時長</td>
+            </tr>
+            </thead>
+            <tbody class="chanceData">
+            </tbody>
+            <tbody class="chanceData">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="charts">
+        <div class="divContainer1">
+            <div class="divTitle">
+                AGV分析
+            </div>
+            <div class="divChart">
+                <div class="chartName">运板达成率趋势</div>
+                <div id="chart1" style="width:1336px;height: 50%;"></div>
+                <div class="chartName">机故率趋势</div>
+                <div id="chart2" style="width:1336px;height: 50%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">异常分析</div>
+        </div>
+        <div class="modal-body">
+            <div class="body-title">贴散热胶垫设备 异常信息</div>
+            <ul class="body-ul">
+                <li>
+                    <span>Time</span>
+                    <span>机故</span>
+                    <span>异常时间（min）</span>
+                    <span>异常位置</span>
+                </li>
+                <li>
+                    <span>8:40</span>
+                    <span>交换超时</span>
+                    <span>5.0</span>
+                    <span>15#RFID</span>
+                </li>
+                <li>
+                    <span>8:50</span>
+                    <span>交换超时</span>
+                    <span>5.0</span>
+                    <span>15#RFID</span>
+                </li>
+                <li>
+                    <span>8:56</span>
+                    <span>交换超时</span>
+                    <span>5.0</span>
+                    <span>15#RFID</span>
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/bootstrap-3.3.7-dist/js/jquery-3.5.1.min.js}" src="../static/bootstrap-3.3.7-dist/js/jquery-3.5.1.min.js"></script>
+<script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}" src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script th:src="@{/js/echarts.js}" src="../static/js/echarts.js"></script>
+<script th:src="@{/js/packingAGV.js}" src="../static/js/packingAGV.js"></script>
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // 触发事件的按钮
+        var recipient = button.data('whatever') // 解析出data-whatever内容
+        var modal = $(this)
+        modal.find('.modal-body input').val(recipient)
+    });
+</script>
+
+<script th:inline="javascript">
+    var arrayLists = [[${arrayLists}]];
+
+    var html = "";
+    //機故數據
+    for(var i = 3; i < 16;i++){
+        for(var j = 0; j < arrayLists[i].length; j++){
+            if(arrayLists[i][j]/60 < 1){
+                arrayLists[i][j] = 0;
+            }
+            else{
+                arrayLists[i][j] = (arrayLists[i][j] / 60).toFixed(0);
+            }
+
+        }
+        html += ` <tr>
+                <td>`+ arrayLists[i][0] +`</td>
+                <td>`+ arrayLists[i][1] +`</td>
+                <td>`+ arrayLists[i][2] +`</td>
+                <td>`+ arrayLists[i][3] +`</td>
+                <td>`+ arrayLists[i][4] +`</td>
+                <td>`+ arrayLists[i][5] +`</td>
+            </tr>`
+    }
+
+    $(".chanceData").html(html);
+
+    var html2 = "";
+    for(var i = 0; i < arrayLists[16].length; i++){
+        html2+=`<tr>
+                <td>5%</td>
+                <td class="chanceRate`+ (i+1) +`"></td>
+            </tr>`
+    }
+    $(".chanceRate").html(html2);
+    for(var i = 0; i < arrayLists[16].length; i++){
+        arrayLists[16][i] = (arrayLists[16][i]/60/60*100).toFixed(2);
+        if(arrayLists[16][i] > 5){
+            $(".chanceRate"+ (i+1)).css("background-color","#E13434");
+            $(".chanceRate"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ (arrayLists[16][i]+"%") +"</span>");
+        }else{
+            $(".chanceRate"+ (i+1)).css("background-color","");
+            $(".chanceRate"+ (i+1)).text(arrayLists[16][i]+"%");
+        }
+
+    }
+
+
+
+
+
+    // console.log(arrayLists);
+    var yieldRte1 = arrayLists[1][0] / arrayLists[0][0];
+    var yieldRte2 = arrayLists[1][1] / arrayLists[0][1];
+    var yieldRte3 = arrayLists[1][2] / arrayLists[0][2];
+    var yieldRte4 = arrayLists[1][3] / arrayLists[0][3];
+    var yieldRte5 = arrayLists[1][4] / arrayLists[0][4];
+    var yieldRte6 = arrayLists[1][5] / arrayLists[0][5];
+    var yieldRte7 = arrayLists[1][6] / arrayLists[0][6];
+    var yieldRte8 = arrayLists[1][7] / arrayLists[0][7];
+    var yieldRte9 = arrayLists[1][8] / arrayLists[0][8];
+    var yieldRte10 = arrayLists[1][9] / arrayLists[0][9];
+    var yieldRte11 = arrayLists[1][10] / arrayLists[0][10];
+    var yieldRte12 = arrayLists[1][11] / arrayLists[0][11];
+    var yieldRte13 = arrayLists[1][12] / arrayLists[0][12];
+    var yieldRteList = [yieldRte1,yieldRte2,yieldRte3,yieldRte4,yieldRte5,yieldRte6,yieldRte7,yieldRte8,yieldRte9,yieldRte10,yieldRte11,yieldRte12,yieldRte13];
+    for(var i = 0 ; i < yieldRteList.length; i++){
+        if(isNaN(yieldRteList[i])){
+            yieldRteList[i] = 1;
+        }
+    }
+
+    var yieldRte21 = arrayLists[2][0] / arrayLists[0][0];
+    var yieldRte22 = arrayLists[2][1] / arrayLists[0][1];
+    var yieldRte23 = arrayLists[2][2] / arrayLists[0][2];
+    var yieldRte24 = arrayLists[2][3] / arrayLists[0][3];
+    var yieldRte25 = arrayLists[2][4] / arrayLists[0][4];
+    var yieldRte26 = arrayLists[2][5] / arrayLists[0][5];
+    var yieldRte27 = arrayLists[2][6] / arrayLists[0][6];
+    var yieldRte28 = arrayLists[2][7] / arrayLists[0][7];
+    var yieldRte29 = arrayLists[2][8] / arrayLists[0][8];
+    var yieldRte210 = arrayLists[2][9] / arrayLists[0][9];
+    var yieldRte211 = arrayLists[2][10] / arrayLists[0][10];
+    var yieldRte212 = arrayLists[2][11] / arrayLists[0][11];
+    var yieldRte213 = arrayLists[2][12] / arrayLists[0][12];
+    var yieldRteList2 = [yieldRte21,yieldRte22,yieldRte23,yieldRte24,yieldRte25,yieldRte26,yieldRte27,yieldRte28,yieldRte29,yieldRte210,yieldRte211,yieldRte212,yieldRte213];
+    for(var i = 0 ; i < yieldRteList2.length; i++){
+        if(isNaN(yieldRteList2[i])){
+            yieldRteList2[i] = 1;
+        }
+    }
+    // console.log(yieldRteList);
+
+    if(arrayLists[0][0] == 0){
+        $("#TTL1").text(0);
+        $("#shiJiCNAll1").text(0);
+        $("#yieldRte1").text("100%");
+        for(var i = 1; i < 13; i++){
+            $("#ARF01"+ i).text(0);
+            $("#shiJiCNARF01"+ i).text(0);
+            $("#yieldRte"+ (i + 1)).text("100%");
+        }
+    }
+    else{
+        if(arrayLists[1][0] < arrayLists[0][0]){
+            if(yieldRte1 < 0.95){
+                $("#yieldRte1").css("background-color","#E13434");
+                $("#yieldRte1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte1* 100).toFixed(2)+"%") +"</span>")
+                $("#shiJiCNAll1").text(arrayLists[0][0]);
+                $("#TTL1").css("background-color","#E13434");
+                $("#TTL1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][0] +"</span>")
+            }
+            else if(0.97 > yieldRte1 > 0.95 ){
+                $("#yieldRte1").css("background-color","#F7B500");
+                $("#yieldRte1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte1* 100).toFixed(2)+"%") +"</span>")
+
+                $("#shiJiCNAll1").text(arrayLists[0][0]);
+                $("#TTL1").css("background-color","#F7B500");
+                $("#TTL1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][0] +"</span>")
+            }
+            else{
+                $("#yieldRte1").css("background-color","");
+                $("#TTL1").css("background-color","");
+                $("#shiJiCNAll1").css("background-color","");
+
+                $("#yieldRte1").text(((yieldRte1* 100).toFixed(2)+"%"));
+                $("#TTL1").text(arrayLists[1][0]);
+                $("#shiJiCNAll1").text(arrayLists[0][0]);
+            }
+        }
+        else{
+            $("#yieldRte1").css("background-color","");
+            $("#TTL1").css("background-color","");
+            $("#shiJiCNAll1").css("background-color","");
+            $("#yieldRte1").text(((yieldRte1* 100).toFixed(2)+"%"));
+            $("#shiJiCNAll1").text(arrayLists[0][0]);
+            $("#TTL1").text(arrayLists[1][0]);
+        }
+
+        for(var i = 1; i < 13; i++){
+            if(arrayLists[0][i] == 0){
+                $("#ARF01"+ i).text(0);
+                $("#shiJiCNARF01"+ i).text(0);
+                $("#yieldRte"+ (i + 1)).text("100%");
+            }else{
+                if(arrayLists[1][i] < arrayLists[0][i]){
+                    if(yieldRteList[i] < 0.95){
+                        $("#yieldRte"+ (i + 1)).css("background-color","#E13434");
+                        $("#yieldRte"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList[i]* 100).toFixed(2) +"%") +"</span>")
+
+
+                        $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
+                        $("#ARF01"+ i).css("background-color","#E13434");
+                        $("#ARF01"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][i] +"</span>")
+                    }
+                    else if( 0.97 > yieldRteList[i] > 0.95){
+                        $("#yieldRte"+ (i + 1)).css("background-color","#F7B500");
+                        $("#yieldRte"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList[i] * 100).toFixed(2)+"%") +"</span>")
+
+
+                        $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
+                        $("#ARF01"+ i).css("background-color","#F7B500");
+                        $("#ARF01"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][i] +"</span>")
+
+                    }else{
+                        $("#yieldRte"+ (i + 1)).css("background-color","");
+                        $("#ARF01"+ i).css("background-color","");
+                        $("#shiJiCNARF01"+ i).css("background-color","");
+
+                        $("#yieldRte"+ (i + 1)).text(((yieldRteList[i] * 100).toFixed(2)+"%"));
+                        $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
+
+                        $("#ARF01"+ i).text(arrayLists[1][i]);
+                    }
+                }
+                else{
+
+                    $("#yieldRte"+ (i + 1)).css("background-color","");
+                    $("#ARF01"+ i).css("background-color","");
+                    $("#shiJiCNARF01"+ i).css("background-color","");
+
+                    $("#yieldRte"+ (i + 1)).text(((yieldRteList[i] * 100).toFixed(2)+"%"));
+                    $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
+                    $("#ARF01"+ i).text(arrayLists[1][i]);
+                }
+            }
+        }
+
+    }
+
+
+
+
+
+    if(arrayLists[0][0] == 0){
+        $("#TTL2").text(0);
+        $("#shiJiCNAll2").text(0);
+        $("#yieldRte21").text("100%");
+        for(var i = 1; i < 13; i++){
+            $("#ARF02"+ i).text(0);
+            $("#shiJiCNARF02"+ i).text(0);
+            $("#yieldRte2"+ (i + 1)).text("100%");
+        }
+    }
+    else{
+        if(arrayLists[2][0] < arrayLists[0][0]){
+            if(yieldRte21 < 0.95){
+                $("#yieldRte21").css("background-color","#E13434");
+                $("#yieldRte21").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte21 * 100).toFixed(2)+"%") +"</span>")
+                $("#shiJiCNAll2").text(arrayLists[0][0]);
+                $("#TTL2").css("background-color","#E13434");
+                $("#TTL2").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][0] +"</span>")
+            }
+            else if(0.97 > yieldRte21 > 0.95 ){
+                $("#yieldRte21").css("background-color","#F7B500");
+                $("#yieldRte21").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte21 * 100).toFixed(2)+"%") +"</span>")
+
+                $("#shiJiCNAll2").text(arrayLists[0][0]);
+                $("#TTL2").css("background-color","#F7B500");
+                $("#TTL2").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][0] +"</span>")
+            }
+            else{
+                $("#yieldRte21").css("background-color","");
+                $("#TTL2").css("background-color","");
+                $("#shiJiCNAll2").css("background-color","");
+
+
+                $("#yieldRte21").text(((yieldRte21 * 100).toFixed(2)+"%"));
+                $("#TTL2").text(arrayLists[2][0]);
+                $("#shiJiCNAll2").text(arrayLists[0][0]);
+            }
+        }
+        else{
+            $("#yieldRte21").css("background-color","");
+            $("#TTL2").css("background-color","");
+            $("#shiJiCNAll2").css("background-color","");
+
+            $("#yieldRte21").text(((yieldRte21 * 100).toFixed(2)+"%"));
+            $("#shiJiCNAll2").text(arrayLists[0][0]);
+            $("#TTL2").text(arrayLists[2][0]);
+        }
+
+        for(var i = 1; i < 13; i++){
+            if(arrayLists[0][i] == 0){
+                $("#ARF02"+ i).text(0);
+                $("#shiJiCNARF02"+ i).text(0);
+                $("#yieldRte2"+ (i + 1)).text("100%");
+            }else{
+                if(arrayLists[2][i] < arrayLists[0][i]){
+                    if(yieldRteList2[i] < 0.95){
+                        $("#yieldRte2"+ (i + 1)).css("background-color","#E13434");
+                        $("#yieldRte2"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2)+"%") +"</span>")
+
+
+                        $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
+                        $("#ARF02"+ i).css("background-color","#E13434");
+                        $("#ARF02"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][i] +"</span>")
+                    }
+                    else if( 0.97 > yieldRteList2[i] > 0.95){
+                        $("#yieldRte2"+ (i + 1)).css("background-color","#F7B500");
+                        $("#yieldRte2"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2)+"%") +"</span>")
+
+
+                        $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
+                        $("#ARF02"+ i).css("background-color","#F7B500");
+                        $("#ARF02"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][i] +"</span>")
+
+                    }else{
+                        $("#yieldRte2"+ (i + 1)).css("background-color","");
+                        $("#shiJiCNARF02"+ i).css("background-color","");
+                        $("#ARF02"+ i).css("background-color","");
+
+
+                        $("#yieldRte2"+ (i + 1)).text(((yieldRteList2[i] * 100).toFixed(2)+"%"));
+
+                        $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
+
+                        $("#ARF02"+ i).text(arrayLists[2][i]);
+                    }
+                }
+                else{
+                    $("#yieldRte2"+ (i + 1)).css("background-color","");
+                    $("#shiJiCNARF02"+ i).css("background-color","");
+                    $("#ARF02"+ i).css("background-color","");
+
+                    $("#yieldRte2"+ (i + 1)).text(((yieldRteList2[i] * 100).toFixed(2)+"%"));
+                    $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
+                    $("#ARF02"+ i).text(arrayLists[2][i]);
+                }
+            }
+        }
+
+    }
+
+
+</script>
+<!-- charts -->
+<script>
+    var newTime = ["6/1","6/2","6/3","6/4","6/5","6/6","6/7"];
+    var xian = ['D061FARF01','D061FARF02'];
+    var ll = ["19.59","13.81","20.46","10","20","19.35","18.52","13.59","15.81","22.46","23","26","22.35","16.52"];
+
+    var rf1 = [];
+    var rf2 = [];
+    var sst = [];
+
+    rf1 = ll.slice(0,7);
+    console.log(rf1)
+    rf2 = ll.slice(7,15);
+    console.log(rf2)
+    sst = newTime.slice(0,8);
+    console.log(sst)
+    var chart1 = echarts.init(document.getElementById('chart1'));//初始化折线图
+    var option1 = {
+        tooltip: { trigger: 'axis' },
+        color: ['#60C0DD', '#0084C6', '#9BCA64', '#FE8463'],
+        legend: {
+            top:5,
+            left:60,
+            itemGap:1,
+            data: xian,
+            show: true,
+            x: '0',
+            y: '20px',
+            textStyle: {
+                "fontSize": 10,
+                color: 'black'
+            }
+        },
+        toolbox: { show: false, },
+        calculable: true,
+        grid: {          //柱状图和折线图的大小通过调整grid里面的值。
+            top: 30,
+            x: 45,
+            x2: 30,
+            y2: 30,
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: sst,
+                // axisLabel: {        //文字傾斜
+                //     interval: 0,
+                //     rotate: 20
+                // },
+                axisLine: {
+                    lineStyle: {
+                        color: "black",
+                    }
+                },
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {},
+                axisLine: {
+                    lineStyle: {
+                        color: "black",
+                    }
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [
+            {
+                name: 'D061FARF01',
+                type: 'line',
+                smooth: true,
+                data: rf1,
+                itemStyle : { normal: {label : {show: true}}}
+            },
+            {
+                name: 'D061FARF02',
+                type: 'line',
+                smooth: true,
+                data: rf2,
+                itemStyle : { normal: {label : {show: true}}}
+            },
+            {
+                type: 'line',
+                smooth: false,
+                symbol: "none",
+                color: '#00FE00',
+                data: [20],
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 1,
+                            type: 'dotted',  //'dotted'虚线 'solid'实线
+
+                        }
+                    }
+                },
+                markLine: {
+                    data: [
+                        { type: 'average', name: '平均值' }
+                    ]
+                },
+
+            },
+        ]
+    };
+
+    chart1.setOption(option1);
+
+
+    var chart2 = echarts.init(document.getElementById('chart2'));//初始化折线图
+    var option2 = {
+        tooltip: { trigger: 'axis' },
+        color: ['#60C0DD', '#0084C6', '#9BCA64', '#FE8463'],
+        legend: {
+            top:5,
+            left:60,
+            itemGap:1,
+            data: xian,
+            show: true,
+            x: '0',
+            y: '20px',
+            textStyle: {
+                "fontSize": 10,
+                color: 'black'
+            }
+        },
+        toolbox: { show: false, },
+        calculable: true,
+        grid: {          //柱状图和折线图的大小通过调整grid里面的值。
+            top: 30,
+            x: 45,
+            x2: 30,
+            y2: 30,
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: sst,
+                // axisLabel: {        //文字傾斜
+                //     interval: 0,
+                //     rotate: 20
+                // },
+                axisLine: {
+                    lineStyle: {
+                        color: "black",
+                    }
+                },
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: {},
+                axisLine: {
+                    lineStyle: {
+                        color: "black",
+                    }
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        series: [
+            {
+                name: 'D061FARF01',
+                type: 'line',
+                smooth: true,
+                data: rf1,
+                itemStyle : { normal: {label : {show: true}}}
+            },
+            {
+                name: 'D061FARF02',
+                type: 'line',
+                smooth: true,
+                data: rf2,
+                itemStyle : { normal: {label : {show: true}}}
+            },
+            {
+                type: 'line',
+                smooth: false,
+                symbol: "none",
+                color: '#00FE00',
+                data: [20],
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 1,
+                            type: 'dotted',  //'dotted'虚线 'solid'实线
+
+                        }
+                    }
+                },
+                markLine: {
+                    data: [
+                        { type: 'average', name: '平均值' }
+                    ]
+                },
+
+            },
+        ]
+    };
+
+    chart2.setOption(option2);
+</script>
+</body>
+
+</html>

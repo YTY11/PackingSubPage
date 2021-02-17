@@ -1,0 +1,165 @@
+*{
+    margin: 0;padding: 0;box-sizing: border-box;
+    font-size:14px;
+    color: black;
+}
+body{
+    width:100%;height: 657px;
+}
+
+.divContainer{
+    width:1356px;height: 1210px;margin: 0 auto;
+}
+.divContainer1{
+    width:1356px;height: 700px;margin: 0 auto;
+}
+.ditTitle{
+    width:1356px;height: 6%;margin: auto;
+    font-size: 14px;padding: 10px;background: #0091FF;color: white;
+}
+.tableTitle{
+    width:1336px;background: #EEEEEE;margin: auto;margin-top: 14px;
+    height: 25px;font-weight: bold;display: flex;align-items: center;justify-content: center;
+}
+.divMain{
+    width:1336px;background: #EEEEEE;display: flex;
+    margin: auto;height: 85%;
+}
+.divMain > .table {
+    width: 25%;
+}
+
+.trTitle{
+    background: #8FD9F6;border:0.1px solid white;
+}
+td{
+    text-align: center;
+    cursor: pointer;
+}
+
+/* 綣合��桁�� */
+.modal-header{
+    padding-bottom: 0!important;
+    border: 0!important;
+}
+.modal-content{
+    width: 700px;
+    height: 410px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -350px;
+    margin-top: -205px;
+}
+.modal-title{
+    background-color: rgb(49, 121, 245);
+    line-height: 1.428571429;
+    color: white;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 5px 0 5px 20px;
+    border-radius: 5px;
+}
+.modal-body{
+    background-color: rgb(49, 121, 245);
+    margin: 15px;
+    border-radius: 5px;
+    margin-bottom: 0px;
+}
+.body-title{
+    color: white;
+    padding: 0 5px 0 5px;
+    margin: 0 0 15px 15px;
+    text-align: center;
+
+}
+.body-ul{
+    list-style: none;
+    display: flex;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.795);
+    flex-direction: column;
+    background-color: rgb(7, 71, 182);
+    border-radius: 5px;
+    padding: 5px;
+}
+.body-ul > li:nth-child(1){
+    background-color: white;
+    border-radius: 5px;
+    border-bottom: 0;
+}
+.body-ul > li {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.281);
+}
+.body-ul > li > span {
+    flex: 1;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.637);
+}
+.body-ul > li:nth-child(1) > span {
+    color: black;
+}
+
+.btn{
+    text-align: center;
+    width: 80px;
+    margin-top: 10px;
+    background-color: rgb(49, 121, 245)!important;
+    color: white!important;
+    margin-right: 15px;
+}
+.modal-footer{
+    padding: 0!important;
+    margin: 0!important;
+    border: 0!important;
+}
+
+/* 蕭�篋��桁�� */
+.red {
+    background-color: #E13434;
+}
+.yellow {
+    background-color: #F7B500;;
+}
+
+
+/* ��膾水�� */
+.charts{
+    width: 100%;
+    margin-top: 20px;
+}
+.divContainer{
+    width:1356px;height: 1210px;border: 1px solid white;margin: auto;
+}
+.divContainer1{
+    width:1356px;height: 700px;border: 1px solid white;margin: auto;
+}
+.divTitle{
+    width:1356px;height: 6%;margin: auto;
+    font-size: 14px;padding: 10px;background: #0091FF;color: white;
+}
+.divChart{
+    width:1356px;height: 92%;margin: auto;border: 1px solid white;margin-top: 15px;
+}
+
+#chart1,#chart2,#chart3{
+    margin: 5px auto;border-radius: 10px;background: #DCF1FA;
+}
+.chartName{
+    width:100px;height: 4%;text-align: center;margin-left: 30px;
+    font-size: 10px;display: flex;justify-content: center;align-items: center;font-weight: bold;
+}
+
+
+
+
+
+
+
+
