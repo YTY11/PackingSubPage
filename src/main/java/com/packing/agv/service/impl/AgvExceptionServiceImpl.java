@@ -26,4 +26,9 @@ public class AgvExceptionServiceImpl implements AgvExceptionService {
     public List<AgvException> getChance() {
         return agvExceptionMapper.getChance();
     }
+
+    @Override
+    public AgvException getChanceSeven(String sTime) {
+        return agvExceptionMapper.getChanceSeven(sTime);
+    }
 }

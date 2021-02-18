@@ -14,7 +14,12 @@
     <result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
     <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="STIME" property="sTime" jdbcType="VARCHAR" />
   </resultMap>
+
+
+<!--白天-->
+
   <select id="getLdrtoagv08" resultMap="BaseResultMap">
     SELECT
         SUM(LDRTOAGV) as LDRTOAGVALL
@@ -295,10 +300,330 @@ SELECT
     <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>  </select>
 
 
+
+
+
+
+<!--    晚上-->
+    <select id="getWanLdrtoagv1" resultMap="BaseResultMap">
+    SELECT
+        SUM(LDRTOAGV) as LDRTOAGVALL
+    FROM
+        "AGV_EXCHANGE_COST_COUNT"
+    where
+        WORKSTATION = 'PK-KT'
+    and
+        LOADER = #{loader}
+    and
+        CYCLE_TYPE = 'DAY'
+    and
+        to_char(STARTTIME,'hh24:mi:ss')
+        BETWEEN '07:30:00'
+        and '08:30:00'
+    and
+        to_char(ENDTIME,'hh24:mi:ss')
+        BETWEEN '07:30:00'
+        and '08:30:00'
+    and
+        to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+    and
+    <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+
+    </select>
+    <select id="getWanLdrtoagv2" resultMap="BaseResultMap">
+SELECT
+        SUM(LDRTOAGV) as LDRTOAGVALL
+    FROM
+        "AGV_EXCHANGE_COST_COUNT"
+    where
+        WORKSTATION = 'PK-KT'
+    and
+        LOADER = #{loader}
+    and
+        CYCLE_TYPE = 'DAY'
+    and
+        to_char(STARTTIME,'hh24:mi:ss')
+        BETWEEN '06:30:00'
+        and '07:30:00'
+    and
+        to_char(ENDTIME,'hh24:mi:ss')
+        BETWEEN '06:30:00'
+        and '07:30:00'
+    and
+        to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+    and
+    <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>  </select>
+    <select id="getWanLdrtoagv3" resultMap="BaseResultMap">
+SELECT
+        SUM(LDRTOAGV) as LDRTOAGVALL
+    FROM
+        "AGV_EXCHANGE_COST_COUNT"
+    where
+        WORKSTATION = 'PK-KT'
+    and
+        LOADER = #{loader}
+    and
+        CYCLE_TYPE = 'DAY'
+    and
+        to_char(STARTTIME,'hh24:mi:ss')
+        BETWEEN '05:30:00'
+        and '06:30:00'
+    and
+        to_char(ENDTIME,'hh24:mi:ss')
+        BETWEEN '05:30:00'
+        and '06:30:00'
+    and
+        to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+    and
+    <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>  </select>
+    <select id="getWanLdrtoagv4" resultMap="BaseResultMap">
+SELECT
+        SUM(LDRTOAGV) as LDRTOAGVALL
+    FROM
+        "AGV_EXCHANGE_COST_COUNT"
+    where
+        WORKSTATION = 'PK-KT'
+    and
+        LOADER = #{loader}
+    and
+        CYCLE_TYPE = 'DAY'
+    and
+        to_char(STARTTIME,'hh24:mi:ss')
+        BETWEEN '04:30:00'
+        and '05:30:00'
+    and
+        to_char(ENDTIME,'hh24:mi:ss')
+        BETWEEN '04:30:00'
+        and '05:30:00'
+    and
+        to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+    and
+    <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>  </select>
+    <select id="getWanLdrtoagv5" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '03:30:00'
+            and '04:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '03:30:00'
+            and '04:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+    </select>
+    <select id="getWanLdrtoagv6" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '02:30:00'
+            and '03:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '02:30:00'
+            and '03:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+    </select>
+    <select id="getWanLdrtoagv7" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '01:30:00'
+            and '02:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '01:30:00'
+            and '02:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+    </select>
+    <select id="getWanLdrtoagv8" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '00:30:00'
+            and '01:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '00:30:00'
+            and '01:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+    </select>
+    <select id="getWanLdrtoagv9" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '23:30:00'
+            and '00:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '23:30:00'
+            and '00:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+    </select>
+    <select id="getWanLdrtoagv10" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '22:30:00'
+            and '23:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '22:30:00'
+            and '23:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd')
+    </select>
+    <select id="getWanLdrtoagv11" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '21:30:00'
+            and '22:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '21:30:00'
+            and '22:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+    </select>
+    <select id="getWanLdrtoagv12" resultMap="BaseResultMap">
+    SELECT
+            SUM(LDRTOAGV) as LDRTOAGVALL
+        FROM
+            "AGV_EXCHANGE_COST_COUNT"
+        where
+            WORKSTATION = 'PK-KT'
+        and
+            LOADER = #{loader}
+        and
+            CYCLE_TYPE = 'DAY'
+        and
+            to_char(STARTTIME,'hh24:mi:ss')
+            BETWEEN '20:30:00'
+            and '21:30:00'
+        and
+            to_char(ENDTIME,'hh24:mi:ss')
+            BETWEEN '20:30:00'
+            and '21:30:00'
+        and
+            to_char(STARTTIME,'yyyy-mm-dd') = to_char(ENDTIME,'yyyy-mm-dd')
+        and
+        <![CDATA[ to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd') ]]>
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
     <select id="getTime" resultType="String">
         SELECT to_char(SYSDATE,'HH24:mi:ss') FROM dual
     </select>
-    
-    
-    
+
+
+
+<!--    达成前七天数据-->
+    <select id="getReachDataSeven" resultMap="BaseResultMap">
+        select sum(LDRTOAGV) as LDRTOAGV from(
+        SELECT sum(LDRTOAGV)as LDRTOAGV ,to_char(STARTTIME,'yyyy-mm-dd') as sTime FROM "AGV_EXCHANGE_COST_COUNT" WHERE
+        WORKSTATION = 'PK-KT' and LOADER = #{loader} and CYCLE_TYPE = 'DAY'  and to_char(STARTTIME,'yyyy-mm-dd') = #{sTime}
+        GROUP BY STARTTIME
+        ORDER BY STARTTIME asc
+        )
+        GROUP BY sTime
+        ORDER BY sTime asc
+    </select>
+
+
+<!--    前七天日期-->
+    <select id="getSevenDate" resultType="String">
+        select to_char(sysdate- level,'yyyy-mm-dd') today from dual connect by level  <![CDATA[ <=7]]> ORDER BY today asc
+    </select>
 </mapper>

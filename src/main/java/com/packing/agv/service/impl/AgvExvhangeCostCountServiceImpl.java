@@ -1,11 +1,13 @@
 package com.packing.agv.service.impl;
 
+import com.packing.agv.entity.AgvExvhangeCostCount;
 import com.packing.agv.mapper.AgvExvhangeCostCountMapper;
 import com.packing.agv.service.AgvExvhangeCostCountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 
 
 /**
@@ -82,8 +84,79 @@ public class AgvExvhangeCostCountServiceImpl implements AgvExvhangeCostCountServ
     }
 
     @Override
+    public String getWanLdrtoagv1(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv1(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv2(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv2(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv3(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv3(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv4(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv4(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv5(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv5(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv6(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv6(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv7(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv7(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv8(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv8(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv9(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv9(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv10(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv10(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv11(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv11(loader);
+    }
+
+    @Override
+    public String getWanLdrtoagv12(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv12(loader);
+    }
+
+    @Override
     public String getTime() {
         return agvExvhangeCostCountMapper.getTime();
+    }
+
+    //获取达成前7天数据
+    @Override
+    public ArrayList<AgvExvhangeCostCount> getReachDataSeven(String loader,String sTime) {
+        return agvExvhangeCostCountMapper.getReachDataSeven(loader,sTime);
+    }
+
+    @Override
+    public ArrayList<String> getSevenDate() {
+        return agvExvhangeCostCountMapper.getSevenDate();
     }
 
 

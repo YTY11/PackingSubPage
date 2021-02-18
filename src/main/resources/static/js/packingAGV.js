@@ -3,10 +3,13 @@ function getAgvData(){
        url: 'getLdrtoagvJs',
        type: "get",
         dataType: "json",
-        success:function (data){
-            var arrayLists = data;
+        success:function (data) {
+            $(".chanceData").html("");
+            $(".chanceRate").html("");
 
-            //機故數據
+            $("#chanNengData").html("");
+            $("#yieldRte").html("");
+            var arrayLists = data;
             var html = "";
             //機故數據
             for(var i = 3; i < 16;i++){
@@ -28,7 +31,7 @@ function getAgvData(){
                 <td>`+ arrayLists[i][5] +`</td>
             </tr>`
             }
-            $(".chanceData").html("");
+
             $(".chanceData").html(html);
 
             var html2 = "";
@@ -38,8 +41,6 @@ function getAgvData(){
                 <td class="chanceRate`+ (i+1) +`"></td>
             </tr>`
             }
-            $(".chanceRate").html("");
-
             $(".chanceRate").html(html2);
             for(var i = 0; i < arrayLists[16].length; i++){
                 arrayLists[16][i] = (arrayLists[16][i]/60/60*100).toFixed(2);
@@ -53,10 +54,19 @@ function getAgvData(){
 
             }
 
+            var isDayTime = [];
+            if(arrayLists[17][0] == "1"){
+                //白天
+                isDayTime = ["TTL","08:30~09:30","09:30~10:30","10:30~11:30","11:30~12:30","12:30~13:30","13:30~14:30","14:30~15:30","15:30~16:30","16:30~17:30","17:30~18:30","18:30~19:30","19:30~20:30"];
+            }
+            else{
+                //夜晚
+                isDayTime = ["TTL","20:30~21:30","21:30~22:30","22:30~23:30","23:30~00:30","00:30~01:30","01:30~02:30","02:30~03:30","03:30~04:30","04:30~05:30","05:30~06:30","06:30~07:30","07:30~08:30"];
+            }
 
 
 
-
+            // 线体1的实际产能率
             var yieldRte1 = arrayLists[1][0] / arrayLists[0][0];
             var yieldRte2 = arrayLists[1][1] / arrayLists[0][1];
             var yieldRte3 = arrayLists[1][2] / arrayLists[0][2];
@@ -77,6 +87,7 @@ function getAgvData(){
                 }
             }
 
+            // 线体2的实际产能率
             var yieldRte21 = arrayLists[2][0] / arrayLists[0][0];
             var yieldRte22 = arrayLists[2][1] / arrayLists[0][1];
             var yieldRte23 = arrayLists[2][2] / arrayLists[0][2];
@@ -96,275 +107,376 @@ function getAgvData(){
                     yieldRteList2[i] = 1;
                 }
             }
-            // console.log(yieldRteList);
-
-            if(arrayLists[0][0] == 0){
-                $("#TTL1").text(0);
-                $("#shiJiCNAll1").text(0);
-                $("#yieldRte1").text("100%");
-                for(var i = 1; i < 13; i++){
-                    $("#ARF01"+ i).text(0);
-                    $("#shiJiCNARF01"+ i).text(0);
-                    $("#yieldRte"+ (i + 1)).text("100%");
-                }
+            var html3 = "";
+            var html4 = "";
+            //线体1
+            for(var i = 0; i < 13; i++){
+                html3+=`<tr>
+                    <td>`+ isDayTime[i] +`</td>
+                    <td>`+ arrayLists[0][i] +`</td>
+                    <td class="shiJiCN1`+ (i+1) +`"> ` + arrayLists[1][i] + ` </td>
+                </tr>`;
+                html4+=`<tr>
+                    <td>100%</td>
+                    <td class="DaChengShiJi1`+ (i+1) +`"> ` + ((yieldRteList[i] * 100).toFixed(2) + "%") + ` </td>
+                </tr>`;
             }
-            else{
-                if(arrayLists[1][0] < arrayLists[0][0]){
-                    if(yieldRte1 < 0.95){
-                        $("#yieldRte1").text('');
-                        $("#TTL1").text('');
-                        $("#shiJiCNAll1").text('');
 
-                        $("#yieldRte1").css("background-color","#E13434");
-                        $("#yieldRte1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte1 * 100).toFixed(2)+"%") +"</span>")
-                        $("#shiJiCNAll1").text(arrayLists[0][0]);
-                        $("#TTL1").css("background-color","#E13434");
-                        $("#TTL1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][0] +"</span>")
+            //线体2
+            for(var i = 0; i < 13; i++){
+                html3+=`<tr>
+                    <td>`+ isDayTime[i] +`</td>
+                    <td>`+ arrayLists[0][i] +`</td>
+                    <td class="shiJiCN2`+ (i+1) +`"> ` + arrayLists[2][i] + ` </td>
+                </tr>`;
+                html4+=`<tr>
+                    <td>100%</td>
+                    <td class="DaChengShiJi2`+ (i+1) +`"> ` + ((yieldRteList2[i] * 100).toFixed(2) + "%") + ` </td>
+                </tr>`;
+            }
+
+            $("#chanNengData").html(html3);
+            $("#yieldRte").html(html4);
+            for(var i = 0; i < 13; i++){
+                if(arrayLists[0][i] != 0){
+                    if(yieldRteList[i] < 0.95){
+                        $(".DaChengShiJi1" + (i+1)).css("background-color","#E13434");
+                        $(".DaChengShiJi1" + (i+1)).text("");
+                        $(".DaChengShiJi1"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList[i] * 100).toFixed(2) + "%") +"</span>")
+
+                        $(".shiJiCN1" + (i+1)).css("background-color","#E13434");
+                        $(".shiJiCN1" + (i+1)).text("");
+                        $(".shiJiCN1"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((arrayLists[1][i] * 100).toFixed(2) + "%") +"</span>")
+
                     }
-                    else if(0.97 > yieldRte1 > 0.95 ){
-                        $("#yieldRte1").text('');
-                        $("#TTL1").text('');
-                        $("#shiJiCNAll1").text('');
+                    else if( 0.97 > yieldRteList[i] > 0.95){
+                        $(".DaChengShiJi1" + (i+1)).css("background-color","#F7B500");
+                        $(".DaChengShiJi1" + (i+1)).text("");
+                        $(".DaChengShiJi1"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList[i] * 100).toFixed(2) + "%") +"</span>")
 
-                        $("#yieldRte1").css("background-color","#F7B500");
-                        $("#yieldRte1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte1 * 100).toFixed(2)+"%") +"</span>")
+                        $(".shiJiCN1" + (i+1)).css("background-color","#F7B500");
+                        $(".shiJiCN1" + (i+1)).text("");
+                        $(".shiJiCN1"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((arrayLists[1][i] * 100).toFixed(2) + "%") +"</span>")
 
-                        $("#shiJiCNAll1").text(arrayLists[0][0]);
-                        $("#TTL1").css("background-color","#F7B500");
-                        $("#TTL1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][0] +"</span>")
-                    }
-                    else{
-                        $("#yieldRte1").text('');
-                        $("#TTL1").text('');
-                        $("#shiJiCNAll1").text('');
+                    }else{
+                        $(".DaChengShiJi1" + (i+1)).css("background-color","");
+                        $(".DaChengShiJi1" + (i+1)).text("");
+                        $(".DaChengShiJi1" + (i+1)).text(((yieldRteList[i] * 100).toFixed(2) + "%"));
 
-                        $("#yieldRte1").css("background-color","");
-                        $("#TTL1").css("background-color","");
-                        $("#shiJiCNAll1").css("background-color","");
+                        $(".shiJiCN1" + (i+1)).css("background-color","");
+                        $(".shiJiCN1" + (i+1)).text("");
+                        $(".shiJiCN1" + (i+1)).text(((arrayLists[1][i] * 100).toFixed(2) + "%"));
 
-                        $("#yieldRte1").text(((yieldRte1 * 100).toFixed(2)+"%"));
-                        $("#TTL1").text(arrayLists[1][0]);
-                        $("#shiJiCNAll1").text(arrayLists[0][0]);
+
                     }
                 }
                 else{
-                    $("#yieldRte1").text('');
-                    $("#TTL1").text('');
-                    $("#shiJiCNAll1").text('');
+                    $(".DaChengShiJi1" + (i+1)).css("background-color","");
+                    $(".DaChengShiJi1" + (i+1)).text("");
+                    $(".DaChengShiJi1" + (i+1)).text(((yieldRteList[i] * 100).toFixed(2) + "%"));
 
-                    $("#yieldRte1").css("background-color","");
-                    $("#TTL1").css("background-color","");
-                    $("#shiJiCNAll1").css("background-color","");
-                    $("#yieldRte1").text(((yieldRte1* 100).toFixed(2) +"%"));
-                    $("#shiJiCNAll1").text(arrayLists[0][0]);
-                    $("#TTL1").text(arrayLists[1][0]);
+                    $(".shiJiCN1" + (i+1)).css("background-color","");
+                    $(".shiJiCN1" + (i+1)).text("");
+                    $(".shiJiCN1" + (i+1)).text(((arrayLists[1][i] * 100).toFixed(2) + "%"));
                 }
+                if(arrayLists[0][i] != 0){
+                    if(yieldRteList2[i] < 0.95){
+                        $(".DaChengShiJi2" + (i+1)).css("background-color","#E13434");
+                        $(".DaChengShiJi2" + (i+1)).text("");
+                        $(".DaChengShiJi2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2) + "%") +"</span>")
 
-                for(var i = 1; i < 13; i++){
-                    if(arrayLists[0][i] == 0){
-                        $("#ARF01"+ i).text(0);
-                        $("#shiJiCNARF01"+ i).text(0);
-                        $("#yieldRte"+ (i + 1)).text("100%");
+                        $(".shiJiCN2" + (i+1)).css("background-color","#E13434");
+                        $(".shiJiCN2" + (i+1)).text("");
+                        $(".shiJiCN2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((arrayLists[2][i] * 100).toFixed(2) + "%") +"</span>")
+
+                    }
+                    else if( 0.97 > yieldRteList[i] > 0.95){
+                        $(".DaChengShiJi2" + (i+1)).css("background-color","#F7B500");
+                        $(".DaChengShiJi2" + (i+1)).text("");
+                        $(".DaChengShiJi2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2) + "%") +"</span>")
+
+                        $(".shiJiCN2" + (i+1)).css("background-color","#F7B500");
+                        $(".shiJiCN2" + (i+1)).text("");
+                        $(".shiJiCN2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((arrayLists[2][i] * 100).toFixed(2) + "%") +"</span>")
+
                     }else{
-                        if(arrayLists[1][i] < arrayLists[0][i]){
-                            if(yieldRteList[i] < 0.95){
-                                $("#yieldRte"+ (i + 1)).text('');
-                                $("#ARF01"+ i).text('');
-                                $("#shiJiCNARF01"+ i).text('');
+                        $(".DaChengShiJi2" + (i+1)).css("background-color","");
+                        $(".DaChengShiJi2" + (i+1)).text("");
+                        $(".DaChengShiJi2" + (i+1)).text(((yieldRteList2[i] * 100).toFixed(2) + "%"));
 
-                                $("#yieldRte"+ (i + 1)).css("background-color","#E13434");
-                                $("#yieldRte"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList[i] * 100).toFixed(2)+"%") +"</span>")
-
-
-                                $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
-                                $("#ARF01"+ i).css("background-color","#E13434");
-                                $("#ARF01"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][i] +"</span>")
-                            }
-                            else if( 0.97 > yieldRteList[i] > 0.95){
-                                $("#yieldRte"+ (i + 1)).text('');
-                                $("#ARF01"+ i).text('');
-                                $("#shiJiCNARF01"+ i).text('');
-
-                                $("#yieldRte"+ (i + 1)).css("background-color","#F7B500");
-                                $("#yieldRte"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList[i] * 100).toFixed(2)+"%") +"</span>")
+                        $(".shiJiCN2" + (i+1)).css("background-color","");
+                        $(".shiJiCN2" + (i+1)).text("");
+                        $(".shiJiCN2" + (i+1)).text(((arrayLists[2][i] * 100).toFixed(2) + "%"));
 
 
-                                $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
-                                $("#ARF01"+ i).css("background-color","#F7B500");
-                                $("#ARF01"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[1][i] +"</span>")
-
-                            }else{
-                                $("#yieldRte"+ (i + 1)).text('');
-                                $("#ARF01"+ i).text('');
-                                $("#shiJiCNARF01"+ i).text('');
-
-                                $("#yieldRte"+ (i + 1)).css("background-color","");
-                                $("#ARF01"+ i).css("background-color","");
-                                $("#shiJiCNARF01"+ i).css("background-color","");
-
-                                $("#yieldRte"+ (i + 1)).text(((yieldRteList[i] * 100).toFixed(2)+"%"));
-                                $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
-
-                                $("#ARF01"+ i).text(arrayLists[1][i]);
-                            }
-                        }
-                        else{
-                            $("#yieldRte"+ (i + 1)).text('');
-                            $("#ARF01"+ i).text('');
-                            $("#shiJiCNARF01"+ i).text('');
-
-                            $("#yieldRte"+ (i + 1)).css("background-color","");
-                            $("#ARF01"+ i).css("background-color","");
-                            $("#shiJiCNARF01"+ i).css("background-color","");
-
-                            $("#yieldRte"+ (i + 1)).text(((yieldRteList[i] * 100).toFixed(2)+"%"));
-                            $("#shiJiCNARF01"+ i).text(arrayLists[0][i]);
-                            $("#ARF01"+ i).text(arrayLists[1][i]);
-                        }
-                    }
-                }
-
-            }
-
-
-
-
-
-            if(arrayLists[0][0] == 0){
-                $("#TTL2").text(0);
-                $("#shiJiCNAll2").text(0);
-                $("#yieldRte21").text("100%");
-                for(var i = 1; i < 13; i++){
-                    $("#ARF02"+ i).text(0);
-                    $("#shiJiCNARF02"+ i).text(0);
-                    $("#yieldRte2"+ (i + 1)).text("100%");
-                }
-            }
-            else{
-                if(arrayLists[2][0] < arrayLists[0][0]){
-                    if(yieldRte21 < 0.95){
-                        $("#yieldRte21").text('');
-                        $("#TTL2").text('');
-                        $("#shiJiCNAll2").text('');
-
-                        $("#yieldRte21").css("background-color","#E13434");
-                        $("#yieldRte21").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte21 * 100).toFixed(2)+"%") +"</span>")
-                        $("#shiJiCNAll2").text(arrayLists[0][0]);
-                        $("#TTL2").css("background-color","#E13434");
-                        $("#TTL2").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][0] +"</span>")
-                    }
-                    else if(0.97 > yieldRte21 > 0.95 ){
-                        $("#yieldRte21").text('');
-                        $("#TTL2").text('');
-                        $("#shiJiCNAll2").text('');
-
-                        $("#yieldRte21").css("background-color","#F7B500");
-                        $("#yieldRte21").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRte21 * 100).toFixed(2)+"%") +"</span>")
-
-                        $("#shiJiCNAll2").text(arrayLists[0][0]);
-                        $("#TTL2").css("background-color","#F7B500");
-                        $("#TTL2").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][0] +"</span>")
-                    }
-                    else{
-                        $("#yieldRte21").text('');
-                        $("#TTL2").text('');
-                        $("#shiJiCNAll2").text('');
-
-                        $("#yieldRte21").css("background-color","");
-                        $("#TTL2").css("background-color","");
-                        $("#shiJiCNAll2").css("background-color","");
-
-
-                        $("#yieldRte21").text(((yieldRte21 * 100).toFixed(2)+"%"));
-                        $("#TTL2").text(arrayLists[2][0]);
-                        $("#shiJiCNAll2").text(arrayLists[0][0]);
                     }
                 }
                 else{
-                    $("#yieldRte21").text('');
-                    $("#TTL2").text('');
-                    $("#shiJiCNAll2").text('');
+                    $(".DaChengShiJi2" + (i+1)).css("background-color","");
+                    $(".DaChengShiJi2" + (i+1)).text("");
+                    $(".DaChengShiJi2" + (i+1)).text(((yieldRteList2[i] * 100).toFixed(2) + "%"));
 
-                    $("#yieldRte21").css("background-color","");
-                    $("#TTL2").css("background-color","");
-                    $("#shiJiCNAll2").css("background-color","");
-
-                    $("#yieldRte21").text(((yieldRte21 * 100).toFixed(2)+"%"));
-                    $("#shiJiCNAll2").text(arrayLists[0][0]);
-                    $("#TTL2").text(arrayLists[2][0]);
-                }
-
-                for(var i = 1; i < 13; i++){
-                    if(arrayLists[0][i] == 0){
-                        $("#ARF02"+ i).text(0);
-                        $("#shiJiCNARF02"+ i).text(0);
-                        $("#yieldRte2"+ (i + 1)).text("100%");
-                    }else{
-                        if(arrayLists[2][i] < arrayLists[0][i]){
-                            if(yieldRteList2[i] < 0.95){
-                                $("#yieldRte2"+ (i + 1)).text('');
-                                $("#ARF02"+ i).text('');
-                                $("#shiJiCNARF02"+ i).text('');
-
-                                $("#yieldRte2"+ (i + 1)).css("background-color","#E13434");
-                                $("#yieldRte2"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2)+"%") +"</span>")
+                    $(".shiJiCN2" + (i+1)).css("background-color","");
+                    $(".shiJiCN2" + (i+1)).text("");
+                    $(".shiJiCN2" + (i+1)).text(((arrayLists[2][i] * 100).toFixed(2) + "%"));
 
 
-                                $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
-                                $("#ARF02"+ i).css("background-color","#E13434");
-                                $("#ARF02"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][i] +"</span>")
-                            }
-                            else if( 0.97 > yieldRteList2[i] > 0.95){
-                                $("#yieldRte2"+ (i + 1)).text('');
-                                $("#ARF02"+ i).text('');
-                                $("#shiJiCNARF02"+ i).text('');
-
-                                $("#yieldRte2"+ (i + 1)).css("background-color","#F7B500");
-                                $("#yieldRte2"+ (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2)+"%") +"</span>")
-
-
-                                $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
-                                $("#ARF02"+ i).css("background-color","#F7B500");
-                                $("#ARF02"+ i).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ arrayLists[2][i] +"</span>")
-
-                            }else{
-                                $("#yieldRte2"+ (i + 1)).text('');
-                                $("#ARF02"+ i).text('');
-                                $("#shiJiCNARF02"+ i).text('');
-
-                                $("#yieldRte2"+ (i + 1)).css("background-color","");
-                                $("#shiJiCNARF02"+ i).css("background-color","");
-                                $("#ARF02"+ i).css("background-color","");
-
-
-                                $("#yieldRte2"+ (i + 1)).text(((yieldRteList2[i] * 100).toFixed(2)+"%"));
-
-                                $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
-
-                                $("#ARF02"+ i).text(arrayLists[2][i]);
-                            }
-                        }
-                        else{
-                            $("#yieldRte2"+ (i + 1)).text('');
-                            $("#ARF02"+ i).text('');
-                            $("#shiJiCNARF02"+ i).text('');
-
-                            $("#yieldRte2"+ (i + 1)).css("background-color","");
-                            $("#shiJiCNARF02"+ i).css("background-color","");
-                            $("#ARF02"+ i).css("background-color","");
-
-                            $("#yieldRte2"+ (i + 1)).text(((yieldRteList2[i] * 100).toFixed(2)+"%"));
-                            $("#shiJiCNARF02"+ i).text(arrayLists[0][i]);
-                            $("#ARF02"+ i).text(arrayLists[2][i]);
-                        }
-                    }
                 }
 
             }
-        },
+
+        }
     });
 }
 
+
+
+function getReachDataSeven(){
+    $.ajax({
+       url: 'getReachDataSeven',
+       type: "get",
+        dataType: "json",
+        success:function (data) {
+            console.log(data);
+            var newTime = data[0];
+            var xian = ['D061FARF01','D061FARF02'];
+
+
+            var sst = [];
+
+
+            sst = newTime.slice(0,8);
+            var chart1 = echarts.init(document.getElementById('chart1'));//初始化折线图
+            var option1 = {
+                tooltip: {
+                    trigger: 'axis',
+                    formatter:function (params) {
+                        var str = "";
+                        str = '<div style="color: white">' + params[0].name + '</div>'+params[0].marker+" "+params[0].seriesName+": "+params[0].data+"%"  +'<br/>'+params[1].marker+" "+params[1].seriesName+": "+params[1].data+"%"  +''
+                        return str;
+                    },//展示百分比
+                },
+                color: ['#60C0DD', '#0084C6', '#9BCA64', '#FE8463'],
+                legend: {
+                    top:5,
+                    left:60,
+                    itemGap:1,
+                    data: xian,
+                    show: true,
+                    x: '0',
+                    y: '20px',
+                    textStyle: {
+                        "fontSize": 10,
+                        color: 'black'
+                    }
+                },
+                toolbox: { show: false, },
+                calculable: true,
+                grid: {          //柱状图和折线图的大小通过调整grid里面的值。
+                    top: 30,
+                    x: 45,
+                    x2: 30,
+                    y2: 30,
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: data[0],
+                        // axisLabel: {        //文字傾斜
+                        //     interval: 0,
+                        //     rotate: 20
+                        // },
+                        axisLine: {
+                            lineStyle: {
+                                color: "black",
+                            }
+
+                        },
+                        axisLabel:{
+                            margin:1,//刻度标签与轴线之间的距离。
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        axisLabel: {
+                            show:true,
+                            interval:'auto',
+                            formatter:'{value}%' //纵轴显示百分比
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: "black",
+                            }
+                        },
+                        splitLine: {
+                            show: false
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: 'D061FARF01',
+                        type: 'line',
+                        smooth: true,
+                        data: data[1],
+                        itemStyle : { normal: {label : {show: true}}}
+                    },
+                    {
+                        name: 'D061FARF02',
+                        type: 'line',
+                        smooth: true,
+                        data: data[2],
+                        itemStyle : { normal: {label : {show: true}}}
+                    },
+                    {
+                        type: 'line',
+                        smooth: false,
+                        symbol: "none",
+                        color: '#00FE00',
+                        data: [95],
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    width: 1,
+                                    type: 'dotted',  //'dotted'虚线 'solid'实线
+
+                                }
+                            }
+                        },
+                        markLine: {
+                            data: [
+                                { type: 'average', name: '平均值' }
+                            ]
+                        },
+
+                    },
+                ]
+            };
+
+            chart1.setOption(option1);
+
+
+            var chart2 = echarts.init(document.getElementById('chart2'));//初始化折线图
+            var option2 = {
+                tooltip: {
+                    trigger: 'axis',
+                    formatter:function (params) {
+                        var str = "";
+                        str = '<div style="color: white">' + params[0].name + '</div>'+params[0].marker+" "+params[0].seriesName+": "+params[0].data+"%"  +'<br/>'+params[1].marker+" "+params[1].seriesName+": "+params[1].data+"%"  +''
+                        return str;
+                    },//展示百分比
+                },
+                color: ['#60C0DD', '#0084C6', '#9BCA64', '#FE8463'],
+                legend: {
+                    top:5,
+                    left:60,
+                    itemGap:1,
+                    data: xian,
+                    show: true,
+                    x: '0',
+                    y: '20px',
+                    textStyle: {
+                        "fontSize": 10,
+                        color: 'black'
+                    }
+                },
+                toolbox: { show: false, },
+                calculable: true,
+                grid: {          //柱状图和折线图的大小通过调整grid里面的值。
+                    top: 30,
+                    x: 45,
+                    x2: 30,
+                    y2: 30,
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: data[0],
+                        // axisLabel: {        //文字傾斜
+                        //     interval: 0,
+                        //     rotate: 20
+                        // },
+                        axisLine: {
+                            lineStyle: {
+                                color: "black",
+                            }
+                        },
+                        axisLabel:{
+                            margin:1,//刻度标签与轴线之间的距离。
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        axisLabel: {
+                            show:true,
+                            interval:'auto',
+                            formatter:'{value}%' //纵轴显示百分比
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: "black",
+                            }
+                        },
+                        splitLine: {
+                            show: false
+                        }
+                    }
+                ],
+                series: [
+                    {
+                        name: 'D061FARF01',
+                        type: 'line',
+                        smooth: true,
+                        data: data[3],
+                        itemStyle : { normal: {label : {show: true}}}
+                    },
+                    {
+                        name: 'D061FARF02',
+                        type: 'line',
+                        smooth: true,
+                        data: data[3],
+                        itemStyle : { normal: {label : {show: true}}}
+                    },
+                    {
+                        type: 'line',
+                        smooth: false,
+                        symbol: "none",
+                        color: '#00FE00',
+                        data: [5],
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    width: 1,
+                                    type: 'dotted',  //'dotted'虚线 'solid'实线
+
+                                }
+                            }
+                        },
+                        markLine: {
+                            data: [
+                                { type: 'average', name: '平均值' }
+                            ]
+                        },
+
+                    },
+                ]
+            };
+
+            chart2.setOption(option2);
+        }
+    });
+}
+
+
 setInterval(function () {
     getAgvData();
+    getReachDataSeven();
 },15000);
+
+

@@ -17,10 +17,21 @@
   <select id="getChance" resultMap="BaseResultMap">
     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
     WHERE  FLOOR like 'D061F%'
-    and <![CDATA[to_char(STARTTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd')]]>
-    and <![CDATA[to_char(ENDTIME,'yyyy-mm-dd') = to_char(trunc(SYSDATE),'yyyy-mm-dd')]]>
+    and  STARTTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
     AND WORKSTATION='KT-AFS'
     group by  DEVICE,ERROR,time_slot,WORKSTATION
     order by time_slot desc
+  </select>
+
+  <select id="getChanceSeven" resultMap="BaseResultMap">
+    select sum(cost) as cost from(
+    SELECT nvl(sum(cost),0) as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  to_char(STARTTIME,'yyyy-mm-dd') = #{sTime}
+    and  to_char(ENDTIME,'yyyy-mm-dd') = #{sTime}
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot desc )
   </select>
 </mapper>

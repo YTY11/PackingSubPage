@@ -29,8 +29,12 @@ body{
     width: 25%;
 }
 
+
 .trTitle{
     background: #8FD9F6;border:0.1px solid white;
+}
+.trTitle1{
+    background: #8FD9F6;
 }
 td{
     text-align: center;

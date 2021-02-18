@@ -1,5 +1,9 @@
 package com.packing.agv.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class AgvExvhangeCostCount {
@@ -22,6 +26,35 @@ public class AgvExvhangeCostCount {
     private String cycleType;
 
     private Date starttime;
+
+    public String getsTime() {
+        return sTime;
+    }
+
+    public void setsTime(String sTime) {
+        this.sTime = sTime;
+    }
+
+    @Override
+    public String toString() {
+        return "AgvExvhangeCostCount{" +
+                "id=" + id +
+                ", floor='" + floor + '\'' +
+                ", workstation='" + workstation + '\'' +
+                ", loader='" + loader + '\'' +
+                ", ldrtoagv='" + ldrtoagv + '\'' +
+                ", agvtoldr='" + agvtoldr + '\'' +
+                ", cost='" + cost + '\'' +
+                ", count='" + count + '\'' +
+                ", cycleType='" + cycleType + '\'' +
+                ", starttime=" + starttime +
+                ", sTime='" + sTime + '\'' +
+                ", endtime=" + endtime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
+    private String sTime;
 
     private Date endtime;
 
@@ -122,4 +155,5 @@ public class AgvExvhangeCostCount {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 }
