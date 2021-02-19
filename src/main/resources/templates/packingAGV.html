@@ -27,92 +27,7 @@
                 <td style="border-top: 1px solid #8FD9F6;">&nbsp;</td>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td rowspan="14" style="vertical-align: middle;text-align: center">ARF01</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td rowspan="14" style="vertical-align: middle;text-align: center">ARF02</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-            </tr>
-
+            <tbody id="xianTi">
             </tbody>
         </table>
         <table class="table" style="width: 21%">
@@ -157,16 +72,6 @@
             </tr>
             </thead>
             <tbody class="chanceRate">
-            <tr>
-                <td>5%</td>
-                <td class="chanceRate1"></td>
-            </tr>
-            </tbody>
-            <tbody class="chanceRate">
-            <tr>
-                <td>5%</td>
-                <td class="chanceRate1"></td>
-            </tr>
             </tbody>
         </table>
 
@@ -185,8 +90,6 @@
                 <td>機故時長</td>
             </tr>
             </thead>
-            <tbody class="chanceData">
-            </tbody>
             <tbody class="chanceData">
             </tbody>
         </table>
@@ -264,12 +167,11 @@
 <script th:inline="javascript">
 
     getReachDataSeven();
-    var arrayLists = [[${arrayLists}]];
-    console.log(arrayLists);
-
+    let ldrtoagv = getLdrtoagv();
+    var arrayLists = ldrtoagv;
     var html = "";
     //機故數據
-    for(var i = 3; i < 16;i++){
+    for(var i = 2; i < 15;i++){
         for(var j = 0; j < arrayLists[i].length; j++){
             if(arrayLists[i][j]/60 < 1){
                 arrayLists[i][j] = 0;
@@ -292,27 +194,27 @@
     $(".chanceData").html(html);
 
     var html2 = "";
-    for(var i = 0; i < arrayLists[16].length; i++){
+    for(var i = 0; i < arrayLists[15].length; i++){
         html2+=`<tr>
                 <td>5%</td>
                 <td class="chanceRate`+ (i+1) +`"></td>
             </tr>`
     }
     $(".chanceRate").html(html2);
-    for(var i = 0; i < arrayLists[16].length; i++){
-        arrayLists[16][i] = (arrayLists[16][i]/60/60*100).toFixed(2);
-        if(arrayLists[16][i] > 5){
+    for(var i = 0; i < arrayLists[15].length; i++){
+        arrayLists[15][i] = (arrayLists[15][i]/60/60*100).toFixed(2);
+        if(arrayLists[15][i] > 5){
             $(".chanceRate"+ (i+1)).css("background-color","#E13434");
-            $(".chanceRate"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ (arrayLists[16][i]+"%") +"</span>");
+            $(".chanceRate"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ (arrayLists[15][i]+"%") +"</span>");
         }else{
             $(".chanceRate"+ (i+1)).css("background-color","");
-            $(".chanceRate"+ (i+1)).text(arrayLists[16][i]+"%");
+            $(".chanceRate"+ (i+1)).text(arrayLists[15][i]+"%");
         }
 
     }
 
     var isDayTime = [];
-    if(arrayLists[17][0] == "1"){
+    if(arrayLists[16][0] == "1"){
         //白天
         isDayTime = ["TTL","08:30~09:30","09:30~10:30","10:30~11:30","11:30~12:30","12:30~13:30","13:30~14:30","14:30~15:30","15:30~16:30","16:30~17:30","17:30~18:30","18:30~19:30","19:30~20:30"];
     }
@@ -344,26 +246,6 @@
         }
     }
 
-    // 线体2的实际产能率
-    var yieldRte21 = arrayLists[2][0] / arrayLists[0][0];
-    var yieldRte22 = arrayLists[2][1] / arrayLists[0][1];
-    var yieldRte23 = arrayLists[2][2] / arrayLists[0][2];
-    var yieldRte24 = arrayLists[2][3] / arrayLists[0][3];
-    var yieldRte25 = arrayLists[2][4] / arrayLists[0][4];
-    var yieldRte26 = arrayLists[2][5] / arrayLists[0][5];
-    var yieldRte27 = arrayLists[2][6] / arrayLists[0][6];
-    var yieldRte28 = arrayLists[2][7] / arrayLists[0][7];
-    var yieldRte29 = arrayLists[2][8] / arrayLists[0][8];
-    var yieldRte210 = arrayLists[2][9] / arrayLists[0][9];
-    var yieldRte211 = arrayLists[2][10] / arrayLists[0][10];
-    var yieldRte212 = arrayLists[2][11] / arrayLists[0][11];
-    var yieldRte213 = arrayLists[2][12] / arrayLists[0][12];
-    var yieldRteList2 = [yieldRte21,yieldRte22,yieldRte23,yieldRte24,yieldRte25,yieldRte26,yieldRte27,yieldRte28,yieldRte29,yieldRte210,yieldRte211,yieldRte212,yieldRte213];
-    for(var i = 0 ; i < yieldRteList2.length; i++){
-        if(isNaN(yieldRteList2[i])){
-            yieldRteList2[i] = 1;
-        }
-    }
     var html3 = "";
     var html4 = "";
     //线体1
@@ -379,18 +261,6 @@
                 </tr>`;
     }
 
-    //线体2
-    for(var i = 0; i < 13; i++){
-        html3+=`<tr>
-                    <td>`+ isDayTime[i] +`</td>
-                    <td>`+ arrayLists[0][i] +`</td>
-                    <td class="shiJiCN2`+ (i+1) +`"> ` + arrayLists[2][i] + ` </td>
-                </tr>`;
-        html4+=`<tr>
-                    <td>100%</td>
-                    <td class="DaChengShiJi2`+ (i+1) +`"> ` + ((yieldRteList2[i] * 100).toFixed(2) + "%") + ` </td>
-                </tr>`;
-    }
 
     $("#chanNengData").html(html3);
     $("#yieldRte").html(html4);
@@ -414,28 +284,6 @@
                 $(".shiJiCN1" + (i+1)).css("background-color","#F7B500");
                 $(".shiJiCN1" + (i+1)).text("");
                 $(".shiJiCN1"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((arrayLists[1][i] * 100).toFixed(2) + "%") +"</span>")
-
-            }
-        }
-        if(arrayLists[0][i] != 0){
-            if(yieldRteList2[i] < 0.95){
-                $(".DaChengShiJi2" + (i+1)).css("background-color","#E13434");
-                $(".DaChengShiJi2" + (i+1)).text("");
-                $(".DaChengShiJi2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2) + "%") +"</span>")
-
-                $(".shiJiCN2" + (i+1)).css("background-color","#E13434");
-                $(".shiJiCN2" + (i+1)).text("");
-                $(".shiJiCN2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((arrayLists[2][i] * 100).toFixed(2) + "%") +"</span>")
-
-            }
-            else if( 0.97 > yieldRteList[i] > 0.95){
-                $(".DaChengShiJi2" + (i+1)).css("background-color","#F7B500");
-                $(".DaChengShiJi2" + (i+1)).text("");
-                $(".DaChengShiJi2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((yieldRteList2[i] * 100).toFixed(2) + "%") +"</span>")
-
-                $(".shiJiCN2" + (i+1)).css("background-color","#F7B500");
-                $(".shiJiCN2" + (i+1)).text("");
-                $(".shiJiCN2"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ ((arrayLists[2][i] * 100).toFixed(2) + "%") +"</span>")
 
             }
         }

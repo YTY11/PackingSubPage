@@ -8,7 +8,7 @@ body{
 }
 
 .divContainer{
-    width:1356px;height: 1210px;margin: 0 auto;
+    width:1356px;height: 655px;margin: 0 auto;
 }
 .divContainer1{
     width:1356px;height: 700px;margin: 0 auto;
@@ -139,7 +139,7 @@ td{
     margin-top: 20px;
 }
 .divContainer{
-    width:1356px;height: 1210px;border: 1px solid white;margin: auto;
+    width:1356px;height: 655px;border: 1px solid white;margin: auto;
 }
 .divContainer1{
     width:1356px;height: 700px;border: 1px solid white;margin: auto;

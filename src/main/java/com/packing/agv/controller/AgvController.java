@@ -4,7 +4,6 @@ import com.packing.agv.entity.AgvException;
 import com.packing.agv.service.AgvExceptionService;
 import com.packing.agv.service.AgvExvhangeCostCountService;
 
-import jxl.write.DateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -32,6 +31,7 @@ public class AgvController {
     @Autowired
     private AgvExceptionService agvExceptionService;
 
+    //获取agv数据方法
     public  ArrayList<Integer> getAgvData(String loader) throws ParseException {
         ArrayList<Integer> ldrtoagvList = new ArrayList<>();
         //获取当前系统时间
@@ -242,8 +242,20 @@ public class AgvController {
 
         return ldrtoagvList;
     }
+
+    @RequestMapping("getAgvPage")
+    public String getAgvPage(){
+        return "packingAGV";
+    }
+
+
+
+    //获取agv数据并返回页面
     @RequestMapping("getLdrtoagv")
-    public String getLdrtoagv(Model model) throws ParseException {
+    @ResponseBody
+    public ArrayList<ArrayList<Integer>> getLdrtoagv(String loader) throws ParseException {
+
+
         int timeNum = 0;
         String oracleTime = agvExvhangeCostCountService.getTime();
         String oracleTime1 = oracleTime.substring(0, 2);
@@ -294,9 +306,9 @@ public class AgvController {
 
 
         //纖體1 實際產能數據
-        ArrayList<Integer> ldrtoagvList = getAgvData("d302");
-        //纖體2 實際產能數據
-        ArrayList<Integer> ldrtoagvList2 = getAgvData("d301");
+        ArrayList<Integer> ldrtoagvList = getAgvData(loader);
+//        //纖體2 實際產能數據
+//        ArrayList<Integer> ldrtoagvList2 = getAgvData("d301");
 
 
         //機故
@@ -1557,8 +1569,8 @@ public class AgvController {
         //线体1
         arrayLists.add(ldrtoagvList);
 
-        //线体2
-        arrayLists.add(ldrtoagvList2);
+//        //线体2
+//        arrayLists.add(ldrtoagvList2);
 
         //機故數據
         arrayLists.add(chanceListAll);
@@ -1583,15 +1595,17 @@ public class AgvController {
 
 
 
-        //返回页面数据
-        model.addAttribute("arrayLists", arrayLists);
+//        //返回页面数据
+//        model.addAttribute("arrayLists", arrayLists);
 
-        return "packingAGV";
+        return arrayLists;
     }
 
+
+    //刷新使用
     @RequestMapping("getLdrtoagvJs")
     @ResponseBody
-    public ArrayList<ArrayList<Integer>> getLdrtoagvJs() throws ParseException {
+    public ArrayList<ArrayList<Integer>> getLdrtoagvJs(String loader) throws ParseException {
         int timeNum = 0;
         String oracleTime = agvExvhangeCostCountService.getTime();
         String oracleTime1 = oracleTime.substring(0, 2);
@@ -1642,9 +1656,9 @@ public class AgvController {
 
 
         //纖體1 實際產能數據
-        ArrayList<Integer> ldrtoagvList = getAgvData("d302");
-        //纖體2 實際產能數據
-        ArrayList<Integer> ldrtoagvList2 = getAgvData("d301");
+        ArrayList<Integer> ldrtoagvList = getAgvData(loader);
+//        //纖體2 實際產能數據
+//        ArrayList<Integer> ldrtoagvList2 = getAgvData("d301");
 
 
         //機故
@@ -2905,8 +2919,8 @@ public class AgvController {
         //线体1
         arrayLists.add(ldrtoagvList);
 
-        //线体2
-        arrayLists.add(ldrtoagvList2);
+//        //线体2
+//        arrayLists.add(ldrtoagvList2);
 
         //機故數據
         arrayLists.add(chanceListAll);
@@ -2928,7 +2942,6 @@ public class AgvController {
 
         //用于页面判断是白天or夜晚的数据
         arrayLists.add(idDayTime);
-
 
         return arrayLists;
     }
