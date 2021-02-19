@@ -36,7 +36,7 @@ public class AgvController {
         ArrayList<Integer> ldrtoagvList = new ArrayList<>();
         //获取当前系统时间
         String oracleTime = agvExvhangeCostCountService.getTime();
-
+        String oracleTime1 = oracleTime.substring(0, 2);
         //判断是白天or夜天
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Long time = dateFormat.parse(oracleTime).getTime();
@@ -189,9 +189,18 @@ public class AgvController {
             if(agvExvhangeCostCountService.getWanLdrtoagv3(loader)!=null){
                 wanLdrtoagv3 = Integer.parseInt(agvExvhangeCostCountService.getWanLdrtoagv3(loader))*250;
             }
-            if(agvExvhangeCostCountService.getWanLdrtoagv4(loader)!=null){
-                wanLdrtoagv4 = Integer.parseInt(agvExvhangeCostCountService.getWanLdrtoagv4(loader))*250;
+
+            if(Integer.parseInt(oracleTime1) > 20){
+                if(agvExvhangeCostCountService.getWanLdrtoagv4(loader)!=null){
+                    wanLdrtoagv4 = Integer.parseInt(agvExvhangeCostCountService.getWanLdrtoagv4(loader))*250;
+                }
+            }else{
+                if(agvExvhangeCostCountService.getWanLdrtoagv42(loader)!=null){
+                    wanLdrtoagv4 = Integer.parseInt(agvExvhangeCostCountService.getWanLdrtoagv42(loader))*250;
+                }
             }
+
+
             if(agvExvhangeCostCountService.getWanLdrtoagv5(loader)!=null){
                 wanLdrtoagv5 = Integer.parseInt(agvExvhangeCostCountService.getWanLdrtoagv5(loader))*250;
             }
@@ -405,12 +414,14 @@ public class AgvController {
 
 
         //機故數據
-        List<AgvException> chance = agvExceptionService.getChance();
+        List<AgvException> chance = new ArrayList<>();
+//        List<AgvException> chance = agvExceptionService.getChance();
 
-        ArrayList<Integer> idDayTime = new ArrayList<>();
-        idDayTime.add(0, 1);
+        ArrayList<Integer> isDayTime = new ArrayList<>();
+        isDayTime.add(0, 1);
         //白天
         if(time >= time1 && time <= time13){
+            chance = agvExceptionService.getChance();
             if(time >= time1 && time <= time2){
                 timeNum = 1;
             }
@@ -885,7 +896,17 @@ public class AgvController {
 
         //夜晚
         else{
-            idDayTime.set(0, 0);
+            if(Integer.parseInt(oracleTime1) < 20){
+                chance = agvExceptionService.getChance2();
+
+            }
+            else{
+                chance = agvExceptionService.getChance3();
+
+            }
+
+
+            isDayTime.set(0, 0);
             if(time >= time13 && time <= time14){
                 timeNum = 1;
             }
@@ -1591,7 +1612,7 @@ public class AgvController {
         arrayLists.add(timeDataList);
 
         //用于页面判断是白天or夜晚的数据
-        arrayLists.add(idDayTime);
+        arrayLists.add(isDayTime);
 
 
 

@@ -104,6 +104,11 @@ public class AgvExvhangeCostCountServiceImpl implements AgvExvhangeCostCountServ
     }
 
     @Override
+    public String getWanLdrtoagv42(String loader) {
+        return agvExvhangeCostCountMapper.getWanLdrtoagv42(loader);
+    }
+
+    @Override
     public String getWanLdrtoagv5(String loader) {
         return agvExvhangeCostCountMapper.getWanLdrtoagv5(loader);
     }

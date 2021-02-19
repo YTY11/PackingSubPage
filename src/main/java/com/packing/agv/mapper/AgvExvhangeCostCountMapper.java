@@ -23,18 +23,19 @@ public interface AgvExvhangeCostCountMapper {
      String getLdrtoagv19(@Param("loader") String loader); //19:30~20:30
 
      //夜天
-     String getWanLdrtoagv1(@Param("loader") String loader); //07:30~08:30
-     String getWanLdrtoagv2(@Param("loader") String loader); //06:30~07:30
-     String getWanLdrtoagv3(@Param("loader") String loader); //05:30~06:30
-     String getWanLdrtoagv4(@Param("loader") String loader); //04:30~05:30
-     String getWanLdrtoagv5(@Param("loader") String loader); //03:30~04:30
-     String getWanLdrtoagv6(@Param("loader") String loader); //02:30~03:30
-     String getWanLdrtoagv7(@Param("loader") String loader); //01:30~02:30
-     String getWanLdrtoagv8(@Param("loader") String loader); //00:30~01:30
-     String getWanLdrtoagv9(@Param("loader") String loader); //23:30~00:30
-     String getWanLdrtoagv10(@Param("loader") String loader); //22:30~23:30
-     String getWanLdrtoagv11(@Param("loader") String loader); //21:30~22:30
-     String getWanLdrtoagv12(@Param("loader") String loader); //20:30~21:30
+     String getWanLdrtoagv1(@Param("loader") String loader);
+     String getWanLdrtoagv2(@Param("loader") String loader);
+     String getWanLdrtoagv3(@Param("loader") String loader);
+     String getWanLdrtoagv4(@Param("loader") String loader);
+     String getWanLdrtoagv42(@Param("loader") String loader);
+     String getWanLdrtoagv5(@Param("loader") String loader);
+     String getWanLdrtoagv6(@Param("loader") String loader);
+     String getWanLdrtoagv7(@Param("loader") String loader);
+     String getWanLdrtoagv8(@Param("loader") String loader);
+     String getWanLdrtoagv9(@Param("loader") String loader);
+     String getWanLdrtoagv10(@Param("loader") String loader);
+     String getWanLdrtoagv11(@Param("loader") String loader);
+     String getWanLdrtoagv12(@Param("loader") String loader);
 
 
      String getTime(); //獲取時間

@@ -28,18 +28,20 @@ public interface AgvExvhangeCostCountService {
     public String getLdrtoagv19(String loader); //19:30~20:30
 
     //夜天
-    String getWanLdrtoagv1(String loader); //07:30~08:30
-    String getWanLdrtoagv2(String loader); //06:30~07:30
-    String getWanLdrtoagv3(String loader); //05:30~06:30
-    String getWanLdrtoagv4(String loader); //04:30~05:30
-    String getWanLdrtoagv5(String loader); //03:30~04:30
-    String getWanLdrtoagv6(String loader); //02:30~03:30
-    String getWanLdrtoagv7(String loader); //01:30~02:30
-    String getWanLdrtoagv8(String loader); //00:30~01:30
-    String getWanLdrtoagv9(String loader); //23:30~00:30
-    String getWanLdrtoagv10(String loader); //22:30~23:30
-    String getWanLdrtoagv11(String loader); //21:30~22:30
-    String getWanLdrtoagv12(String loader); //20:30~21:30
+    String getWanLdrtoagv1(String loader);
+    String getWanLdrtoagv2(String loader);
+    String getWanLdrtoagv3(String loader);
+    String getWanLdrtoagv4(String loader);
+    String getWanLdrtoagv42(String loader);
+
+    String getWanLdrtoagv5(String loader);
+    String getWanLdrtoagv6(String loader);
+    String getWanLdrtoagv7(String loader);
+    String getWanLdrtoagv8(String loader);
+    String getWanLdrtoagv9(String loader);
+    String getWanLdrtoagv10(String loader);
+    String getWanLdrtoagv11(String loader);
+    String getWanLdrtoagv12(String loader);
 
 
     String getTime(); //獲取時間

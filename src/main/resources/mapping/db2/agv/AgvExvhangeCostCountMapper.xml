@@ -382,6 +382,29 @@ SELECT
         CYCLE_TYPE = 'DAY'
     and
         STARTTIME
+        BETWEEN to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '23:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '00:30:00','yyyy-mm-dd HH24:mi:ss')
+    and
+        ENDTIME
+        BETWEEN to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '23:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '00:30:00','yyyy-mm-dd HH24:mi:ss')
+
+    </select>
+
+
+    <select id="getWanLdrtoagv42" resultMap="BaseResultMap">
+        SELECT
+        SUM(LDRTOAGV) as LDRTOAGVALL
+    FROM
+        "AGV_EXCHANGE_COST_COUNT"
+    where
+        WORKSTATION = 'PK-KT'
+    and
+        LOADER = #{loader}
+    and
+        CYCLE_TYPE = 'DAY'
+    and
+        STARTTIME
         BETWEEN to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '23:30:00','yyyy-mm-dd HH24:mi:ss')
         and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '00:30:00','yyyy-mm-dd HH24:mi:ss')
     and

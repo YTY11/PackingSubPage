@@ -17,12 +17,35 @@
   <select id="getChance" resultMap="BaseResultMap">
     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
     WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot desc
+  </select>
+
+
+  <select id="getChance2" resultMap="BaseResultMap">
+    SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
     and  STARTTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
     and ENDTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
     AND WORKSTATION='KT-AFS'
     group by  DEVICE,ERROR,time_slot,WORKSTATION
     order by time_slot desc
   </select>
+
+
+  <select id="getChance3" resultMap="BaseResultMap">
+    SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot desc
+  </select>
+
 
   <select id="getChanceSeven" resultMap="BaseResultMap">
     select sum(cost) as cost from(
