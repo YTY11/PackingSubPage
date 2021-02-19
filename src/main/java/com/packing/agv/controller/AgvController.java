@@ -1,10 +1,10 @@
 package com.packing.agv.controller;
 
 import com.packing.agv.entity.AgvException;
-import com.packing.agv.entity.AgvExvhangeCostCount;
 import com.packing.agv.service.AgvExceptionService;
 import com.packing.agv.service.AgvExvhangeCostCountService;
 
+import jxl.write.DateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,7 +34,6 @@ public class AgvController {
 
     public  ArrayList<Integer> getAgvData(String loader) throws ParseException {
         ArrayList<Integer> ldrtoagvList = new ArrayList<>();
-
         //获取当前系统时间
         String oracleTime = agvExvhangeCostCountService.getTime();
 
@@ -2940,25 +2939,6 @@ public class AgvController {
     @RequestMapping("getReachDataSeven")
     @ResponseBody
     public ArrayList<ArrayList<String>> getReachDataSeven() throws ParseException {
-        //线体1
-        int d1Data1 = 0;
-        int d1Data2 = 0;
-        int d1Data3 = 0;
-        int d1Data4 = 0;
-        int d1Data5 = 0;
-        int d1Data6 = 0;
-        int d1Data7 = 0;
-
-        //线体2
-        int d2Data1 = 0;
-        int d2Data2 = 0;
-        int d2Data3 = 0;
-        int d2Data4 = 0;
-        int d2Data5 = 0;
-        int d2Data6 = 0;
-        int d2Data7 = 0;
-
-        agvExceptionService.getChanceSeven("2021-02-07");
 
         //用于存储总数据
         ArrayList<ArrayList<String>> arrayLists = new ArrayList<>();

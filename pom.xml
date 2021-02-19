@@ -9,10 +9,10 @@
         <version>2.1.17.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.fox.furntemp</groupId>
-    <artifactId>furntemp</artifactId>
+    <groupId>com.packing.agv</groupId>
+    <artifactId>agv</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>agv</name>
+    <name>PackingSubPageAGV</name>
     <description>packingAGV</description>
 
     <properties>
