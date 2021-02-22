@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +39,52 @@ public class AgvExceptionServiceImpl implements AgvExceptionService {
     }
 
     @Override
+    public String getJiGuTime1(String sTime) {
+        return agvExceptionMapper.getJiGuTime1(sTime);
+    }
+
+    @Override
+    public String getJiGuTime21(String sTime) {
+        return agvExceptionMapper.getJiGuTime21(sTime);
+    }
+
+    @Override
+    public String getJiGuTime22(String sTime) {
+        return agvExceptionMapper.getJiGuTime22(sTime);
+    }
+
+    @Override
     public AgvException getChanceSeven(String sTime) {
         return agvExceptionMapper.getChanceSeven(sTime);
+    }
+
+    @Override
+    public ArrayList<AgvException> getErrorMsg1(String sTime) {
+        return agvExceptionMapper.getErrorMsg1(sTime);
+    }
+
+    @Override
+    public ArrayList<AgvException> getErrorMsgAll1() {
+        return agvExceptionMapper.getErrorMsgAll1();
+    }
+
+    @Override
+    public ArrayList<AgvException> getErrorMsg21(String sTime) {
+        return agvExceptionMapper.getErrorMsg21(sTime);
+    }
+
+    @Override
+    public ArrayList<AgvException> getErrorMsgAll21() {
+        return agvExceptionMapper.getErrorMsgAll21();
+    }
+
+    @Override
+    public ArrayList<AgvException> getErrorMsg22(String sTime) {
+        return agvExceptionMapper.getErrorMsg21(sTime);
+    }
+
+    @Override
+    public ArrayList<AgvException> getErrorMsgAll22() {
+        return agvExceptionMapper.getErrorMsgAll22();
     }
 }

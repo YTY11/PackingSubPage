@@ -4,8 +4,8 @@ package com.packing.agv.mapper;
 import com.packing.agv.entity.AgvExvhangeCostCount;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface AgvExvhangeCostCountMapper {
      //白天
@@ -37,7 +37,8 @@ public interface AgvExvhangeCostCountMapper {
      String getWanLdrtoagv11(@Param("loader") String loader);
      String getWanLdrtoagv12(@Param("loader") String loader);
 
-
+     String getTimeJiGe1();//系统时间 yyyy-mm-dd HH:mm:ss 白天
+     String getTimeJiGe2();//系统时间 yyyy-mm-dd HH:mm:ss 晚上
      String getTime(); //獲取時間
 
      //获取达成前7天数据

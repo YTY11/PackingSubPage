@@ -3,8 +3,8 @@ package com.packing.agv.service;
 import com.packing.agv.entity.AgvExvhangeCostCount;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -43,6 +43,8 @@ public interface AgvExvhangeCostCountService {
     String getWanLdrtoagv11(String loader);
     String getWanLdrtoagv12(String loader);
 
+    String getTimeJiGe1();//系统时间 yyyy-mm-dd HH:mm:ss 白天
+    String getTimeJiGe2();//系统时间 yyyy-mm-dd HH:mm:ss 晚上
 
     String getTime(); //獲取時間
 

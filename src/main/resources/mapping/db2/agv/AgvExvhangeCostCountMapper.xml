@@ -606,6 +606,15 @@ SELECT
     </select>
 
 
+    <select id="getTimeJiGe1" resultType="String">
+        SELECT to_char(SYSDATE,'yyyy-mm-dd HH24:mi:ss') FROM dual
+    </select>
+
+    <select id="getTimeJiGe2" resultType="String">
+        SELECT to_char(SYSDATE-1,'yyyy-mm-dd HH24:mi:ss') FROM dual
+    </select>
+
+
 
 <!--    达成前七天数据-->
     <select id="getReachDataSeven" resultMap="BaseResultMap">

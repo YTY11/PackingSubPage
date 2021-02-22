@@ -304,71 +304,23 @@ function getLdrtoagv(){
 
 function getAgvData(){
     $.ajax({
-        url: 'getLdrtoagvJs',
+        url: 'getLdrtoagv',
         type: "get",
         dataType: "json",
         data:{
             "loader":loader,
         },
         success:function (data) {
-            $(".chanceData").html("");
-            $(".chanceRate").html("");
-
-            $("#chanNengData").html("");
-            $("#yieldRte").html("");
             var arrayLists = data;
-            var html = "";
-            //機故數據
-            for(var i = 2; i < 15;i++){
-                for(var j = 0; j < arrayLists[i].length; j++){
-                    if(arrayLists[i][j]/60 < 1){
-                        arrayLists[i][j] = 0;
-                    }
-                    else{
-                        arrayLists[i][j] = (arrayLists[i][j] / 60).toFixed(0);
-                    }
-
-                }
-                html += ` <tr>
-                <td>`+ arrayLists[i][0] +`</td>
-                <td>`+ arrayLists[i][1] +`</td>
-                <td>`+ arrayLists[i][2] +`</td>
-                <td>`+ arrayLists[i][3] +`</td>
-                <td>`+ arrayLists[i][4] +`</td>
-                <td>`+ arrayLists[i][5] +`</td>
-            </tr>`
-            }
-
-            $(".chanceData").html(html);
-
-            var html2 = "";
-            for(var i = 0; i < arrayLists[15].length; i++){
-                html2+=`<tr>
-                <td>5%</td>
-                <td class="chanceRate`+ (i+1) +`"></td>
-            </tr>`
-            }
-            $(".chanceRate").html(html2);
-            for(var i = 0; i < arrayLists[15].length; i++){
-                arrayLists[15][i] = (arrayLists[15][i]/60/60*100).toFixed(2);
-                if(arrayLists[15][i] > 5){
-                    $(".chanceRate"+ (i+1)).css("background-color","#E13434");
-                    $(".chanceRate"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ (arrayLists[15][i]+"%") +"</span>");
-                }else{
-                    $(".chanceRate"+ (i+1)).css("background-color","");
-                    $(".chanceRate"+ (i+1)).text(arrayLists[15][i]+"%");
-                }
-
-            }
 
             var isDayTime = [];
             if(arrayLists[16][0] == "1"){
                 //白天
-                isDayTime = ["TTL","08:30~09:30","09:30~10:30","10:30~11:30","11:30~12:30","12:30~13:30","13:30~14:30","14:30~15:30","15:30~16:30","16:30~17:30","17:30~18:30","18:30~19:30","19:30~20:30"];
+                isDayTime = ["TTL","8:30~9:30","9:30~10:30","10:30~11:30","11:30~12:30","12:30~13:30","13:30~14:30","14:30~15:30","15:30~16:30","16:30~17:30","17:30~18:30","18:30~19:30","19:30~20:30"];
             }
             else{
                 //夜晚
-                isDayTime = ["TTL","20:30~21:30","21:30~22:30","22:30~23:30","23:30~00:30","00:30~01:30","01:30~02:30","02:30~03:30","03:30~04:30","04:30~05:30","05:30~06:30","06:30~07:30","07:30~08:30"];
+                isDayTime = ["TTL","20:30~21:30","21:30~22:30","22:30~23:30","23:30~0:30","0:30~1:30","1:30~2:30","2:30~3:30","3:30~4:30","4:30~5:30","5:30~6:30","6:30~07:30","7:30~8:30"];
             }
 
 
@@ -412,27 +364,29 @@ function getAgvData(){
 
 
 
+            $("#chanNengData").html("");
             $("#chanNengData").html(html3);
+            $("#yieldRte").html("");
             $("#yieldRte").html(html4);
             for(var i = 0; i < 13; i++) {
                 if (arrayLists[0][i] != 0) {
                     if (yieldRteList[i] < 0.95) {
                         $(".DaChengShiJi1" + (i + 1)).css("background-color", "#E13434");
                         $(".DaChengShiJi1" + (i + 1)).text("");
-                        $(".DaChengShiJi1" + (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">" + ((yieldRteList[i] * 100).toFixed(2) + "%") + "</span>")
+                        $(".DaChengShiJi1" + (i + 1)).append("<span >" + ((yieldRteList[i] * 100).toFixed(2) + "%") + "</span>")
 
                         $(".shiJiCN1" + (i + 1)).css("background-color", "#E13434");
                         $(".shiJiCN1" + (i + 1)).text("");
-                        $(".shiJiCN1" + (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">" + ((arrayLists[1][i] * 100).toFixed(2) + "%") + "</span>")
+                        $(".shiJiCN1" + (i + 1)).append("<span >" + arrayLists[1][i] + "</span>")
 
                     } else if (0.97 > yieldRteList[i] > 0.95) {
                         $(".DaChengShiJi1" + (i + 1)).css("background-color", "#F7B500");
                         $(".DaChengShiJi1" + (i + 1)).text("");
-                        $(".DaChengShiJi1" + (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">" + ((yieldRteList[i] * 100).toFixed(2) + "%") + "</span>")
+                        $(".DaChengShiJi1" + (i + 1)).append("<span >" + ((yieldRteList[i] * 100).toFixed(2) + "%") + "</span>")
 
                         $(".shiJiCN1" + (i + 1)).css("background-color", "#F7B500");
                         $(".shiJiCN1" + (i + 1)).text("");
-                        $(".shiJiCN1" + (i + 1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">" + ((arrayLists[1][i] * 100).toFixed(2) + "%") + "</span>")
+                        $(".shiJiCN1" + (i + 1)).append("<span >" + arrayLists[1][i] + "</span>")
 
                     } else {
                         $(".DaChengShiJi1" + (i + 1)).css("background-color", "");
@@ -441,7 +395,7 @@ function getAgvData(){
 
                         $(".shiJiCN1" + (i + 1)).css("background-color", "");
                         $(".shiJiCN1" + (i + 1)).text("");
-                        $(".shiJiCN1" + (i + 1)).text(((arrayLists[1][i] * 100).toFixed(2) + "%"));
+                        $(".shiJiCN1" + (i + 1)).text(arrayLists[1][i]);
 
 
                     }
@@ -452,12 +406,113 @@ function getAgvData(){
 
                     $(".shiJiCN1" + (i + 1)).css("background-color", "");
                     $(".shiJiCN1" + (i + 1)).text("");
-                    $(".shiJiCN1" + (i + 1)).text(((arrayLists[1][i] * 100).toFixed(2) + "%"));
+                    $(".shiJiCN1" + (i + 1)).text(arrayLists[1][i]);
                 }
+            }
+
+
+
+
+
+            var html = "";
+            //機故數據
+            for(var i = 2; i < 15;i++){
+                if(arrayLists[i][5]/60 < 1){
+                    arrayLists[i][5] = 0;
+                }
+                else{
+                    arrayLists[i][5] = Math.floor(arrayLists[i][5] / 60);
+                }
+                html += ` <tr>
+                <td>`+ arrayLists[i][0] +`</td>
+                <td>`+ arrayLists[i][1] +`</td>
+                <td>`+ arrayLists[i][2] +`</td>
+                <td>`+ arrayLists[i][3] +`</td>
+                <td>`+ arrayLists[i][4] +`</td>
+                <td>`+ arrayLists[i][5] +`</td>
+            </tr>`
+            }
+
+            $(".chanceData").html("");
+            $(".chanceData").html(html);
+
+            var html2 = "";
+            for(var i = 0; i < arrayLists[15].length; i++){
+                let time = isDayTime[i];
+                html2+=`<tr>
+                <td>5%</td>
+                <td class="chanceRate`+ (i+1) +`" onclick="getErrorMsg('`+ time +`')"></td>
+            </tr>`
+            }
+            $(".chanceRate").html("");
+            $(".chanceRate").html(html2);
+            for(var i = 1; i < arrayLists[15].length; i++){
+
+
+                arrayLists[15][i] = (arrayLists[15][i]/60/60*100).toFixed(2);
+
+                if(arrayLists[15][i] > 5){
+                    $(".chanceRate"+ (i+1)).css("background-color","#E13434");
+                    $(".chanceRate"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ (arrayLists[15][i]+"%") +"</span>");
+                }else{
+                    $(".chanceRate"+ (i+1)).css("background-color","");
+                    $(".chanceRate"+ (i+1)).append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ (arrayLists[15][i]+"%") +"</span>");
+                }
+
+            }
+            var a = arrayLists[17][0]+0;
+            arrayLists[15][0] = (arrayLists[15][0]/60/a*100).toFixed(2);
+            if(arrayLists[15][0] > 5){
+                $(".chanceRate1").css("background-color","#E13434");
+                $(".chanceRate1").append("<span >"+ (arrayLists[15][0]+"%") +"</span>");
+            }else{
+                $(".chanceRate1").css("background-color","");
+                $(".chanceRate1").append("<span data-toggle=\"modal\" data-target=\"#exampleModal\">"+ (arrayLists[15][0]+"%") +"</span>");
             }
 
         }
     });
+}
+
+
+
+function getErrorMsg(time) {
+
+
+    $.ajax({
+        url:'getErrorMsg',
+        type:"get",
+        dataType:"json",
+        data:{
+            "errorTime":time,
+        },
+        success:function (data) {
+            //errorMsg
+            var html="";
+            html = `<li>
+                        <span>Time</span>
+                        <span>机故</span>
+                        <span>异常时间（s）</span>
+                        <span>异常位置</span>
+                    </li>`;
+
+            for(var i = 0; i < data.length; i++){
+
+                html+=`<li>
+                            <span>`+ data[i][1] +`</span>
+                            <span>`+ data[i][0] +`</span>
+                            <span>`+ data[i][2] +`</span>
+                            <span>AGV</span>
+                       </li>`
+
+            }
+            $("#errorMsg").html("");
+
+            $("#errorMsg").html(html);
+        }
+
+    })
+
 }
 
 

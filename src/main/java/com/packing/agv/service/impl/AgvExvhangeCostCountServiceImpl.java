@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -146,6 +147,16 @@ public class AgvExvhangeCostCountServiceImpl implements AgvExvhangeCostCountServ
     @Override
     public String getWanLdrtoagv12(String loader) {
         return agvExvhangeCostCountMapper.getWanLdrtoagv12(loader);
+    }
+
+    @Override
+    public String getTimeJiGe1() {
+        return agvExvhangeCostCountMapper.getTimeJiGe1();
+    }
+
+    @Override
+    public String getTimeJiGe2() {
+        return agvExvhangeCostCountMapper.getTimeJiGe2();
     }
 
     @Override

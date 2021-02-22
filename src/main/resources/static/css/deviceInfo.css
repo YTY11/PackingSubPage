@@ -48,7 +48,7 @@ td{
 }
 .modal-content{
     width: 700px;
-    height: 410px;
+    /*height: 410px;*/
     position: absolute;
     top: 50%;
     left: 50%;
@@ -159,7 +159,6 @@ td{
     width:100px;height: 4%;text-align: center;margin-left: 30px;
     font-size: 10px;display: flex;justify-content: center;align-items: center;font-weight: bold;
 }
-
 
 
 

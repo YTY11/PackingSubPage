@@ -57,4 +57,117 @@
     group by  DEVICE,ERROR,time_slot,WORKSTATION
     order by time_slot desc )
   </select>
+
+
+
+
+
+<!--  获取机故故障时间 白天-->
+  <select id="getJiGuTime1" resultMap="BaseResultMap">
+    SELECT sum(cost) as cost from(
+    SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot desc ) where TIME_SLOT = #{sTime}
+  </select>
+
+  <!--  获取机故故障时间 晚上 1-->
+  <select id="getJiGuTime21" resultMap="BaseResultMap">
+    SELECT sum(cost) as cost from(
+    SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot desc) where TIME_SLOT = #{sTime}
+  </select>
+
+  <!--  获取机故故障时间 晚上 2-->
+  <select id="getJiGuTime22" resultMap="BaseResultMap">
+    SELECT sum(cost) as cost from(
+    SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot desc ) where TIME_SLOT = #{sTime}
+  </select>
+
+
+
+
+  <!-- 白天异常数据 -->
+  <select id="getErrorMsg1" resultMap="BaseResultMap">
+     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+		and TIME_SLOT = #{sTime}
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot asc
+  </select>
+
+  <select id="getErrorMsgAll1" resultMap="BaseResultMap">
+     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot asc
+  </select>
+
+
+  <!-- 夜晚异常数据1 -->
+  <select id="getErrorMsg21" resultMap="BaseResultMap">
+     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+		and TIME_SLOT = #{sTime}
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot asc
+  </select>
+
+  <select id="getErrorMsgAll21" resultMap="BaseResultMap">
+     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot asc
+  </select>
+
+
+  <!-- 夜晚异常数据2 -->
+  <select id="getErrorMsg22" resultMap="BaseResultMap">
+     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+		and TIME_SLOT = #{sTime}
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot asc
+  </select>
+
+  <select id="getErrorMsgAll22" resultMap="BaseResultMap">
+     SELECT ERROR,time_slot,sum(cost)as cost FROM AGV_EXCEPTION
+    WHERE  FLOOR like 'D061F%'
+    and  STARTTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    and ENDTIME between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss') and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+    AND WORKSTATION='KT-AFS'
+    group by  DEVICE,ERROR,time_slot,WORKSTATION
+    order by time_slot asc
+  </select>
+
+
 </mapper>
