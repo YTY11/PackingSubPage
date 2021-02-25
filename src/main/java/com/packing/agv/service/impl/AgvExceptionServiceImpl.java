@@ -80,7 +80,7 @@ public class AgvExceptionServiceImpl implements AgvExceptionService {
 
     @Override
     public ArrayList<AgvException> getErrorMsg22(String sTime) {
-        return agvExceptionMapper.getErrorMsg21(sTime);
+        return agvExceptionMapper.getErrorMsg22(sTime);
     }
 
     @Override

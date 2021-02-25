@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.packing.pd.mapper.AutofloorSmtGrtMapper" >
+  <resultMap id="BaseResultMap" type="com.packing.pd.entity.AutofloorSmtGrt" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="FLOOR" property="floor" jdbcType="VARCHAR" />
+    <result column="PRODUCT" property="product" jdbcType="VARCHAR" />
+    <result column="LINENAME" property="linename" jdbcType="VARCHAR" />
+    <result column="MACHINETYPE" property="machinetype" jdbcType="VARCHAR" />
+    <result column="TESTTIME" property="testtime" jdbcType="TIMESTAMP" />
+    <result column="PROGRAMNAME" property="programname" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="UPFLAG" property="upflag" jdbcType="DECIMAL" />
+    <result column="UPH" property="uph" jdbcType="VARCHAR" />
+    <result column="RE_CHECK_NG" property="reCheckNg" jdbcType="VARCHAR" />
+    <result column="THROWING" property="throwing" jdbcType="VARCHAR" />
+    <result column="LINENAME2" property="linename2" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!--    获取现在时间-->
+    <select id="getTime" resultType="String" >
+        SELECT to_char(SYSDATE,'HH24:mi:ss') FROM dual
+    </select>
+
+
+<!--  白天时间段内的数据-->
+  <select id="getAllData1" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+     and LINENAME = #{lineName}
+  </select>
+
+  <select id="getAllData2" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '09:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+
+  <select id="getAllData3" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '09:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '10:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData4" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '10:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '11:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData5" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '11:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '12:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData6" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '12:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '13:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData7" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '13:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '14:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData8" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '14:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '15:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData9" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '15:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '16:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+
+  <select id="getAllData10" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '16:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '17:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData11" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '17:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '18:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData12" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '18:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '19:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getAllData13" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '19:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+  </select>
+
+
+
+<!--  白天抛料数据-->
+  <select id="getFejectData1" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+
+  <select id="getFejectData2" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '09:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+
+  <select id="getFejectData3" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '09:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '10:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData4" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '10:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '11:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData5" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '11:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '12:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData6" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '12:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '13:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData7" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '13:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '14:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData8" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '14:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '15:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData9" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '15:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '16:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+
+  <select id="getFejectData10" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '16:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '17:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData11" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '17:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '18:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData12" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '18:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '19:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+  <select id="getFejectData13" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '19:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+        and <![CDATA[THROWING != '0']]>
+     and LINENAME = #{lineName}
+  </select>
+
+
+
+
+
+<!--    白天偏位数据-->
+    <select id="getOffNormal1" resultMap="BaseResultMap"  parameterType="String">
+    SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+
+    <select id="getOffNormal2" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '08:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '09:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+
+    <select id="getOffNormal3" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '09:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '10:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal4" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '10:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '11:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal5" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '11:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '12:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal6" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '12:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '13:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal7" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '13:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '14:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal8" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '14:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '15:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal9" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '15:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '16:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+
+    <select id="getOffNormal10" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '16:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '17:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal11" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '17:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '18:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal12" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '18:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '19:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+    <select id="getOffNormal13" resultMap="BaseResultMap"  parameterType="String">
+        SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG  from(
+
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '19:30:00','yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| '20:30:00','yyyy-mm-dd HH24:mi:ss')
+
+     and LINENAME = #{lineName}
+     ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+  </select>
+
+
+
+
+
+
+    <!--  晚上时间段内的数据1-->
+    <select id="getAllDataYAll1" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+    </select>
+    <select id="getAllDataY1" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+    </select>
+
+    <select id="getAllDataY11" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+    </select>
+    <select id="getAllDataY12" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+    </select>
+    <!--  晚上时间段内的数据2-->
+    <select id="getAllDataYAll2" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+    </select>
+    <select id="getAllDataY2" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+    </select>
+
+
+
+
+    <!--  晚上抛料数据1-->
+    <select id="getFejectDataYAll1" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+        and <![CDATA[THROWING != '0']]>
+    </select>
+    <select id="getFejectDataY1" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+        and <![CDATA[THROWING != '0']]>
+    </select>
+
+    <select id="getFejectDataY11" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+        and <![CDATA[THROWING != '0']]>
+    </select>
+    <select id="getFejectDataY12" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+        and <![CDATA[THROWING != '0']]>
+    </select>
+    <!--  晚上时间段内的数据2-->
+    <select id="getFejectDataYAll2" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+        and <![CDATA[THROWING != '0']]>
+    </select>
+    <select id="getFejectDataY2" resultType="String"  parameterType="String">
+    SELECT count(*) as allData
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+        and <![CDATA[THROWING != '0']]>
+    </select>
+
+
+
+    <!--  晚上偏位数据-->
+    <select id="getOffNormalYAll1" resultMap="BaseResultMap"  parameterType="String">
+    SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG from(
+		SELECT UPH,RE_CHECK_NG
+    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+         ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+    </select>
+    <select id="getOffNormalY1" resultMap="BaseResultMap"  parameterType="String">
+SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG from(
+		SELECT UPH,RE_CHECK_NG    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+         ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+    </select>
+
+    <select id="getOffNormalY11" resultMap="BaseResultMap"  parameterType="String">
+SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG from(
+		SELECT UPH,RE_CHECK_NG    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+         ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+    </select>
+    <select id="getOffNormalY12" resultMap="BaseResultMap"  parameterType="String">
+SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG from(
+		SELECT UPH,RE_CHECK_NG    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+         ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+    </select>
+    <!--  晚上时间段内的数据2-->
+    <select id="getOffNormalYAll2" resultMap="BaseResultMap"  parameterType="String">
+SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG from(
+		SELECT UPH,RE_CHECK_NG    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+         ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+    </select>
+    <select id="getOffNormalY2" resultMap="BaseResultMap"  parameterType="String">
+SELECT nvl(sum(UPH),0) as UPH ,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG from(
+		SELECT UPH,RE_CHECK_NG    FROM "AUTOFLOOR_SMT_GRT"
+    where TESTTIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}
+         ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+    </select>
+
+
+
+
+    <!--    前七天日期-->
+    <select id="getSevenDate" resultType="String">
+        select to_char(sysdate- level,'yyyy-mm-dd') today from dual connect by level  <![CDATA[ <=7]]> ORDER BY today asc
+    </select>
+
+<!--    前七天产量数据-->
+    <select id="getAllDataSeven" resultType="String"  parameterType="String">
+        SELECT count(*)
+        FROM "AUTOFLOOR_SMT_GRT"
+        where   to_char(TESTTIME,'yyyy-mm-dd') = #{time}
+        and LINENAME = #{lineName}
+    </select>
+
+
+    <!--    前七天抛料数据-->
+    <select id="getFejectDataSeven" resultType="String"  parameterType="String">
+        SELECT count(*)
+        FROM "AUTOFLOOR_SMT_GRT"
+        where   to_char(TESTTIME,'yyyy-mm-dd') = #{time}
+        and THROWING != '0'
+        and LINENAME = #{lineName}
+    </select>
+
+    <!--    前七天偏位数据-->
+    <select id="getOffNormalSeven" resultMap="BaseResultMap"  parameterType="String">
+         SELECT nvl(sum(UPH),0) as UPH,nvl(sum(RE_CHECK_NG),0) as RE_CHECK_NG from(
+		SELECT UPH,RE_CHECK_NG
+        FROM "AUTOFLOOR_SMT_GRT"
+        where   to_char(TESTTIME,'yyyy-mm-dd') = #{time}
+        and LINENAME = #{lineName}
+         ORDER BY TESTTIME desc
+		 ) where  rownum = 1
+    </select>
+
+
+
+
+
+</mapper>

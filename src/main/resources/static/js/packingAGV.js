@@ -15,12 +15,17 @@ function getReachDataSeven(){
                 tooltip: {
                     trigger: 'axis',
                     formatter:function (params) {
-                        var str = "";
-                        str = '<div style="color: white">' + params[0].name + '</div>'+params[0].marker+" "+params[0].seriesName+": "+params[0].data+"%"  +'<br/>'+params[1].marker+" "+params[1].seriesName+": "+params[1].data+"%"  +''
-                        return str;
+                        var res = "<div><p style='color: white'>"  + params[0].name + "</p></div>";
+                        for (var i = 0; i < params.length; i++) {
+                            if (params[i].data != undefined) {
+                                res +=
+                                    "<span style='color: white'>" + params[i].marker  + params[i].seriesName + ": &nbsp;" + params[i].data+'%' + "</span><br/>";
+                            }
+                        }
+                        return res;
                     },//展示百分比
                 },
-                color: ['#60C0DD', '#0084C6', '#9BCA64', '#FE8463'],
+                color: ['#0FC3EC', '#162EE5', '#9BCA64', '#FE8463'],
                 legend: {
                     top:5,
                     left:60,
@@ -99,7 +104,7 @@ function getReachDataSeven(){
                         type: 'line',
                         smooth: false,
                         symbol: "none",
-                        color: '#00FE00',
+                        color: '#04E723',
                         data: [95],
                         itemStyle: {
                             normal: {
@@ -128,12 +133,17 @@ function getReachDataSeven(){
                 tooltip: {
                     trigger: 'axis',
                     formatter:function (params) {
-                        var str = "";
-                        str = '<div style="color: white">' + params[0].name + '</div>'+params[0].marker+" "+params[0].seriesName+": "+params[0].data+"%"  +'<br/>'+params[1].marker+" "+params[1].seriesName+": "+params[1].data+"%"  +''
-                        return str;
+                        var res = "<div><p style='color: white'>"  + params[0].name + "</p></div>";
+                        for (var i = 0; i < params.length; i++) {
+                            if (params[i].data != undefined) {
+                                res +=
+                                    "<span style='color: white'>" + params[i].marker  + params[i].seriesName + ": &nbsp;" + params[i].data+'%' + "</span><br/>";
+                            }
+                        }
+                        return res;
                     },//展示百分比
                 },
-                color: ['#60C0DD', '#0084C6', '#9BCA64', '#FE8463'],
+                color: ['#0FC3EC', '#162EE5', '#9BCA64', '#FE8463'],
                 legend: {
                     top:5,
                     left:60,
@@ -211,7 +221,7 @@ function getReachDataSeven(){
                         type: 'line',
                         smooth: false,
                         symbol: "none",
-                        color: '#00FE00',
+                        color: '#04E723',
                         data: [5],
                         itemStyle: {
                             normal: {
@@ -461,6 +471,9 @@ function getAgvData(){
 
             }
             var a = arrayLists[17][0]+0;
+            if(a == 0){
+                a = 1;
+            }
             arrayLists[15][0] = (arrayLists[15][0]/60/a*100).toFixed(2);
             if(arrayLists[15][0] > 5){
                 $(".chanceRate1").css("background-color","#E13434");

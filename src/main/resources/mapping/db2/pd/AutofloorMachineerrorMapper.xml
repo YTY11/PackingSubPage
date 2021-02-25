@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.packing.pd.mapper.AutofloorMachineerrorMapper" >
+  <resultMap id="BaseResultMap" type="com.packing.pd.entity.AutofloorMachineerror" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="FLOOR" property="floor" jdbcType="VARCHAR" />
+    <result column="PRODUCT" property="product" jdbcType="VARCHAR" />
+    <result column="LINENAME" property="linename" jdbcType="VARCHAR" />
+    <result column="MACHINETYPE" property="machinetype" jdbcType="VARCHAR" />
+    <result column="SN" property="sn" jdbcType="VARCHAR" />
+    <result column="EXCEPTIONSTATUS" property="exceptionstatus" jdbcType="VARCHAR" />
+    <result column="EXCEPTIONINDEX" property="exceptionindex" jdbcType="VARCHAR" />
+    <result column="EXCEPTIONINFO" property="exceptioninfo" jdbcType="VARCHAR" />
+    <result column="EXCEPTIONBEGINTIME" property="exceptionbegintime" jdbcType="TIMESTAMP" />
+    <result column="EXCEPTIONENDTIME" property="exceptionendtime" jdbcType="TIMESTAMP" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="WORKSTATION" property="workstation" jdbcType="VARCHAR" />
+    <result column="LINENAME2" property="linename2" jdbcType="VARCHAR" />
+    <result column="P3" property="p3" jdbcType="VARCHAR" />
+    <result column="P4" property="p4" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <select id="getTimeJiGe1" resultType="String">
+        SELECT to_char(SYSDATE,'yyyy-mm-dd HH24:mi:ss') FROM dual
+    </select>
+
+    <select id="getTimeJiGe2" resultType="String">
+        SELECT to_char(SYSDATE-1,'yyyy-mm-dd HH24:mi:ss') FROM dual
+    </select>
+
+
+
+
+    <!--  pd2机故时间-->
+    <select id="getPd2JiGuTime1" resultType="String" parameterType="String">
+    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(
+SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+				)
+  </select>
+
+
+    <!--  pd2机故时间 晚上0点前 23：30~00：30-->
+    <select id="getPd2JiGuTimeY11" resultType="String" parameterType="String">
+    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(
+SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+				)
+  </select>
+    <!--  pd2机故时间 晚上0点后 23：30~00：30-->
+    <select id="getPd2JiGuTimeY12" resultType="String" parameterType="String">
+    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(
+    SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+				)
+  </select>
+
+
+
+
+
+    <!--  pd2机故个数-->
+    <select id="getPd2JiGuGeShu1" resultType="String" parameterType="String">
+    SELECT count(EXCEPTIONSTATUS)
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+  </select>
+
+    <!--  pd2机故个数 晚上0点前 23：30~00：30-->
+    <select id="getPd2JiGuGeShuY11" resultType="String" parameterType="String">
+    SELECT count(EXCEPTIONSTATUS)
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+  </select>
+
+
+    <!--  pd2机故个数 晚上0点后 23：30~00：30-->
+    <select id="getPd2JiGuGeShuY12" resultType="String" parameterType="String">
+    SELECT count(EXCEPTIONSTATUS)
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+  </select>
+
+
+
+    <!--  pd2机故前七天数据-->
+<!--    <select id="getPd2JiGuSeven" resultType="String" parameterType="String">-->
+<!--    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(-->
+<!--    SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa-->
+<!--    FROM "AUTOFLOOR_MACHINEERROR"-->
+<!--    where-->
+<!--				to_char(EXCEPTIONBEGINTIME,'yyyy-mm-dd') = #{time}-->
+<!--        and LINENAME = #{lineName}-->
+<!--				and EXCEPTIONSTATUS like 'S%'-->
+<!--				and MACHINETYPE like '%GRT%'-->
+<!--        ORDER BY UPDATETIME desc-->
+<!--				)-->
+<!--  </select>-->
+
+
+
+    <!--  pd2机故前七天数据-->
+    <select id="getPd2JiGuSeven1" resultMap="BaseResultMap" parameterType="String">
+    SELECT EXCEPTIONBEGINTIME as P3 ,sum(time) as P4 from(
+    SELECT to_char(EXCEPTIONBEGINTIME,'yyyy-mm-dd') as EXCEPTIONBEGINTIME ,(EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60 as time
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where
+				to_char(EXCEPTIONBEGINTIME,'yyyy-mm-dd')
+				in(#{time1},#{time2},#{time3},#{time4},#{time5},#{time6},#{time7})
+
+        and LINENAME = #{lineName}
+				and EXCEPTIONSTATUS like 'S%'
+				and MACHINETYPE like '%GRT%'
+
+
+				)
+GROUP BY EXCEPTIONBEGINTIME
+ORDER BY EXCEPTIONBEGINTIME asc
+  </select>
+
+
+
+
+
+
+
+    <!--  pd1机故时间-->
+    <select id="getPd1JiGuTime1" resultType="String" parameterType="String">
+    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(
+SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+				)
+  </select>
+
+
+    <!--  pd1机故时间 晚上0点前 23：30~00：30-->
+    <select id="getPd1JiGuTimeY11" resultType="String" parameterType="String">
+    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(
+SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+				)
+  </select>
+    <!--  pd1机故时间 晚上0点后 23：30~00：30-->
+    <select id="getPd1JiGuTimeY12" resultType="String" parameterType="String">
+    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(
+    SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+				)
+  </select>
+
+
+
+
+
+    <!--  pd1机故个数-->
+    <select id="getPd1JiGuGeShu1" resultType="String" parameterType="String">
+    SELECT count(EXCEPTIONSTATUS)
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+  </select>
+
+    <!--  pd1机故个数 晚上0点前 23：30~00：30-->
+    <select id="getPd1JiGuGeShuY11" resultType="String" parameterType="String">
+    SELECT count(EXCEPTIONSTATUS)
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+  </select>
+
+
+    <!--  pd1机故个数 晚上0点后 23：30~00：30-->
+    <select id="getPd1JiGuGeShuY12" resultType="String" parameterType="String">
+    SELECT count(EXCEPTIONSTATUS)
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%'and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+  </select>
+
+
+
+    <!--  pd1机故前七天数据-->
+    <!--    <select id="getPd2JiGuSeven" resultType="String" parameterType="String">-->
+    <!--    SELECT nvl(sum(nvl(aa,0))*24*60,0) from(-->
+    <!--    SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME) as aa-->
+    <!--    FROM "AUTOFLOOR_MACHINEERROR"-->
+    <!--    where-->
+    <!--				to_char(EXCEPTIONBEGINTIME,'yyyy-mm-dd') = #{time}-->
+    <!--        and LINENAME = #{lineName}-->
+    <!--				and EXCEPTIONSTATUS like 'S%'-->
+    <!--				and MACHINETYPE like '%SCT%'-->
+    <!--        ORDER BY UPDATETIME desc-->
+    <!--				)-->
+    <!--  </select>-->
+
+
+
+    <!--  pd1机故前七天数据-->
+    <select id="getPd1JiGuSeven1" resultMap="BaseResultMap" parameterType="String">
+    SELECT EXCEPTIONBEGINTIME as P3 ,sum(time) as P4 from(
+    SELECT to_char(EXCEPTIONBEGINTIME,'yyyy-mm-dd') as EXCEPTIONBEGINTIME ,(EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60 as time
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where
+				to_char(EXCEPTIONBEGINTIME,'yyyy-mm-dd')
+				in(#{time1},#{time2},#{time3},#{time4},#{time5},#{time6},#{time7})
+
+        and LINENAME = #{lineName}
+				and EXCEPTIONSTATUS like 'S%'
+				and MACHINETYPE like '%SCT%'
+
+
+				)
+GROUP BY EXCEPTIONBEGINTIME
+ORDER BY EXCEPTIONBEGINTIME asc
+  </select>
+
+
+
+
+
+
+
+
+<!--    pd1异常信息-->
+    <select id="getPd1ErrorMsg1" resultMap="BaseResultMap" parameterType="String">
+        SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60*60 as P3 ,to_char(EXCEPTIONBEGINTIME,'HH24:mi:ss') as P4
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+    </select>
+
+
+    <!--    pd1异常信息 夜晚 0点前 23：30~00：30-->
+    <select id="getPd1ErrorMsgY11" resultMap="BaseResultMap" parameterType="String">
+        SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60*60 as P3 ,to_char(EXCEPTIONBEGINTIME,'HH24:mi:ss') as P4
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+    </select>
+
+    <!--    pd1异常信息 夜晚 0点后 23：30~00：30-->
+    <select id="getPd1ErrorMsgY12" resultMap="BaseResultMap" parameterType="String">
+        SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60*60 as P3 ,to_char(EXCEPTIONBEGINTIME,'HH24:mi:ss') as P4
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%SCT%'
+        ORDER BY UPDATETIME desc
+    </select>
+
+
+
+
+
+    <!--    pd2异常信息-->
+    <select id="getPd2ErrorMsg1" resultMap="BaseResultMap" parameterType="String">
+        SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60*60 as P3 ,to_char(EXCEPTIONBEGINTIME,'HH24:mi:ss') as P4
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+    </select>
+
+    <!--    pd2异常信息 夜晚 0点前 23：30~00：30-->
+    <select id="getPd2ErrorMsgY11" resultMap="BaseResultMap" parameterType="String">
+        SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60*60 as P3 ,to_char(EXCEPTIONBEGINTIME,'HH24:mi:ss') as P4
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE+1,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+    </select>
+
+    <!--    pd2异常信息 夜晚 0点后 23：30~00：30-->
+    <select id="getPd2ErrorMsgY12" resultMap="BaseResultMap" parameterType="String">
+        SELECT (EXCEPTIONENDTIME - EXCEPTIONBEGINTIME)*24*60*60 as P3 ,to_char(EXCEPTIONBEGINTIME,'HH24:mi:ss') as P4
+    FROM "AUTOFLOOR_MACHINEERROR"
+    where UPDATETIME
+        between to_date(to_char(SYSDATE-1,'yyyy-mm-dd')|| #{time1},'yyyy-mm-dd HH24:mi:ss')
+        and to_date(to_char(SYSDATE,'yyyy-mm-dd')|| #{time2},'yyyy-mm-dd HH24:mi:ss')
+        and LINENAME = #{lineName}  and EXCEPTIONSTATUS like 'S%' and MACHINETYPE like '%GRT%'
+        ORDER BY UPDATETIME desc
+    </select>
+
+
+
+
+
+
+</mapper>

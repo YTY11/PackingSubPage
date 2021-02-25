@@ -23,13 +23,13 @@ public interface AgvExceptionService {
 
 
 
-    ArrayList<AgvException> getErrorMsg1(@Param("sTime") String sTime);//白天异常数据
+    ArrayList<AgvException> getErrorMsg1(String sTime);//白天异常数据
     ArrayList<AgvException> getErrorMsgAll1();//白天异常数据
 
-    ArrayList<AgvException> getErrorMsg21(@Param("sTime") String sTime);//夜晚异常数据1
+    ArrayList<AgvException> getErrorMsg21(String sTime);//夜晚异常数据1
     ArrayList<AgvException> getErrorMsgAll21();//夜晚异常数据1
 
-    ArrayList<AgvException> getErrorMsg22(@Param("sTime") String sTime);//夜晚异常数据2
+    ArrayList<AgvException> getErrorMsg22(String sTime);//夜晚异常数据2
     ArrayList<AgvException> getErrorMsgAll22();//夜晚异常数据2
 
 

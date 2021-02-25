@@ -1,4 +1,4 @@
-package com.packing.agv.dbconfig;
+package com.packing.dbconfig;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

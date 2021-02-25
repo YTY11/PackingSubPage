@@ -845,7 +845,7 @@ public class AgvController {
 
 
 
-            if(Integer.parseInt(oracleTime1) <= 20){
+            if(Integer.parseInt(oracleTime1) < 20){
                 chance = agvExceptionService.getChance2();
                 String timeJiGe1 = agvExvhangeCostCountService.getTimeJiGe2();
                 String timeJiGe2 = agvExvhangeCostCountService.getTimeJiGe1();
@@ -1507,13 +1507,15 @@ public class AgvController {
         //最终返回的数据
         ArrayList<ArrayList<String>> arrayLists = new ArrayList<>();
 
-
         ArrayList<Integer> ldrtoagvList = new ArrayList<>();
         //获取当前系统时间
         String oracleTime = agvExvhangeCostCountService.getTime();
         String oracleTime1 = oracleTime.substring(0, 2);
         //判断是白天or夜天
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+//        Date date = new Date();
+//        String oracleTime1 = dateFormat.format(date).substring(0, 2);
+//        Long time = dateFormat.parse(dateFormat.format(date)).getTime();
         Long time = dateFormat.parse(oracleTime).getTime();
         Long time1 = dateFormat.parse("08:30:00").getTime();
         Long time2 = dateFormat.parse("20:30:00").getTime();
@@ -1590,6 +1592,7 @@ public class AgvController {
                 }
                 else{
                     errorMsg1 = agvExceptionService.getErrorMsg22(errorTime);
+//                    System.out.println(errorMsg1);
                 }
                 //数据存入集合
                 for (AgvException agvException : errorMsg1) {
@@ -1604,7 +1607,7 @@ public class AgvController {
             }
         }
 
-
+//        System.out.println(arrayLists);
         return arrayLists;
 
 
