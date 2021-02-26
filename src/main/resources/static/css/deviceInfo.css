@@ -65,10 +65,12 @@ td{
     border-radius: 5px;
 }
 .modal-body{
+    height: 75%;
     background-color: rgb(49, 121, 245);
     margin: 15px;
     border-radius: 5px;
     margin-bottom: 0px;
+
 }
 .body-title{
     color: white;
